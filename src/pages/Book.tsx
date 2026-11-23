@@ -1,19 +1,17 @@
+import { PatternTile } from '../components/PatternTile'
 import { site } from '../config'
 import { Link } from '../components/Link'
-import { BloomShape, ButtonShape, ShapeField } from '../components/Shapes'
 
 export function Book() {
   return (
     <main className="inner-page">
-      <section className="page-hero">
-        <ShapeField variant="page" />
+      <section className="page-hero" data-pattern="rings">
         <p className="eyebrow">Free 20-minute consultation</p>
         <h1>Pick a time. <em>Let’s talk.</em></h1>
         <p>A relaxed conversation about your goals, your training history and your week. No pressure, no sales pitch.</p>
       </section>
       <section className="book-layout section-pad">
         <aside className="contact-aside">
-          <BloomShape className="shape-accent book-bloom" />
           <p className="eyebrow light">In your consultation</p>
           <ol>
             <li><span>01</span>Where you are now: recent training, races and any injuries.</li>
@@ -36,7 +34,7 @@ export function Book() {
               Until then, send us a quick note with a few times that suit you and we’ll confirm a slot
               within two working days.
             </p>
-            <Link className="button button-light" href="/contact?type=consultation"><ButtonShape index={6} />
+            <Link className="button button-light" href="/contact?type=consultation"><PatternTile pattern="cells" cell={7} className="btn-pattern" />
               Request a consultation <span>↗</span>
             </Link>
           </div>

@@ -4,7 +4,6 @@ import { loadClientArea, setSessionDone, type ClientArea } from '../clientData'
 import { site } from '../config'
 import { Link } from '../components/Link'
 import { navigate } from '../router'
-import { ShapeField } from '../components/Shapes'
 
 const dayLabel = (day: string) => new Date(`${day}T12:00:00`).toLocaleDateString(undefined, { weekday: 'short' })
 const whenLabel = (iso: string) =>
@@ -35,8 +34,7 @@ export function Account() {
 
   return (
     <main className="inner-page account-page">
-      <section className="page-hero account-hero">
-        <ShapeField variant="page" />
+      <section className="page-hero account-hero" data-pattern="flow">
         <p className="eyebrow">Client area</p>
         <h1>Hi, <em>{(area?.name ?? user.name).split(' ')[0]}.</em></h1>
         <p>Here’s your week. Tick off each session so your coach can see how it’s going.</p>

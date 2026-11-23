@@ -1,8 +1,8 @@
+import { PatternTile } from '../components/PatternTile'
 import { useState, type FormEvent } from 'react'
 import { AUTH_DEMO, signIn, useUser } from '../auth'
 import { Link } from '../components/Link'
 import { navigate } from '../router'
-import { ButtonShape, ShapeField } from '../components/Shapes'
 
 export function Login() {
   const user = useUser()
@@ -23,15 +23,14 @@ export function Login() {
 
   return (
     <main className="inner-page">
-      <section className="login-section section-pad">
-        <ShapeField variant="band" />
+      <section className="login-section section-pad" data-pattern="cells">
         <div className="login-card">
           <p className="eyebrow light">Client area</p>
           <h1>Welcome <em>back.</em></h1>
           {user ? (
             <>
               <p className="login-copy">You’re signed in as {user.email}.</p>
-              <Link className="button button-light" href="/account"><ButtonShape index={4} />Go to your training <span>→</span></Link>
+              <Link className="button button-light" href="/account"><PatternTile pattern="cells" cell={7} className="btn-pattern" />Go to your training <span>→</span></Link>
             </>
           ) : status === 'link-sent' ? (
             <p className="login-copy" role="status">
@@ -51,7 +50,7 @@ export function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
               />
-              <button className="button button-light" type="submit" disabled={status === 'sending'}><ButtonShape index={5} />
+              <button className="button button-light" type="submit" disabled={status === 'sending'}><PatternTile pattern="cells" cell={7} className="btn-pattern" />
                 {status === 'sending' ? 'Sending…' : AUTH_DEMO ? 'Sign in' : 'Email me a link'} <span>→</span>
               </button>
               {status === 'error' && <p className="form-note" role="alert">We couldn’t send that link. Please try again.</p>}

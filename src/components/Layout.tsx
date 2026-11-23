@@ -1,8 +1,8 @@
+import { PatternTile } from './PatternTile'
 import { useState } from 'react'
 import type { Route } from '../router'
 import { Link } from './Link'
 import { useUser } from '../auth'
-import { ButtonShape } from './Shapes'
 
 const navItems = [
   { label: 'Home', href: '/', page: 'home' },
@@ -66,7 +66,7 @@ export function Header({ route }: { route: Route }) {
         >
           {user ? 'My training' : 'Client login'}
         </Link>
-        <Link className="nav-cta" href="/book" onClick={close}><ButtonShape index={0} />
+        <Link className="nav-cta" href="/book" onClick={close}><PatternTile pattern="cells" cell={7} className="btn-pattern" />
           Free consultation <span>↗</span>
         </Link>
       </nav>
@@ -83,7 +83,7 @@ export function Footer() {
           <p className="eyebrow">Ready when you are</p>
           <h2>Your next finish line starts here.</h2>
         </div>
-        <Link className="circle-link" href="/book"><ButtonShape index={1} />
+        <Link className="circle-link" href="/book"><PatternTile pattern="cells" cell={7} className="btn-pattern" />
           Let’s talk <span>↗</span>
         </Link>
       </div>

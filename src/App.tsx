@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { startMotion } from './motion'
 import { Footer, Header } from './components/Layout'
+import { PatternField } from './components/PatternField'
 import { PREVIEW_MODE, useRoute } from './router'
 import { Home } from './pages/Home'
 import { Coaches } from './pages/Coaches'
@@ -40,7 +41,8 @@ export default function App() {
   }, [route])
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell ${route.page === 'home' ? 'is-home' : ''}`}>
+      <PatternField />
       {!PREVIEW_MODE && <a className="skip-link" href="#main">Skip to content</a>}
       {PREVIEW_MODE && (
         <p className="preview-bar">Preview · forms show their thank-you message but don’t send anything</p>

@@ -1,15 +1,42 @@
 import heroImage from '../assets/endurance-hero.jpg'
 import { Link } from '../components/Link'
 import { InkCanvas } from '../components/InkCanvas'
-import { ButtonShape, ShapeField } from '../components/Shapes'
+import { PatternTile } from '../components/PatternTile'
+import { ScrubText } from '../components/ScrubText'
+import { SectionGuide } from '../components/SectionGuide'
+
+const sections = [
+  { id: 'start', label: 'Start' },
+  { id: 'who', label: 'Who we coach' },
+  { id: 'disciplines', label: 'Disciplines' },
+  { id: 'picture-it', label: 'Picture it' },
+  { id: 'long-view', label: 'The long view' },
+]
+
+// Training-zone tags placed around the hero, like readings on an instrument.
+const readings = [
+  { label: 'Zone 2 · aerobic base', top: '18%', left: '64%' },
+  { label: 'Threshold', top: '30%', left: '74%' },
+  { label: 'VO₂ max', top: '62%', left: '58%' },
+  { label: 'Cadence 180', top: '70%', left: '84%' },
+  { label: 'Recovery', top: '17%', left: '84%' },
+]
 
 export function Home() {
   return (
-    <main>
-      <section className="hero">
+    <main className="home">
+      <SectionGuide sections={sections} />
+
+      <section id="start" className="hero" data-pattern="cells">
         <img src={heroImage} alt="Distance runner training on a mountain road at dawn" />
         <div className="hero-shade" />
-        <ShapeField variant="hero" />
+        <div className="readings" aria-hidden="true">
+          {readings.map((r) => (
+            <span key={r.label} className="reading" style={{ top: r.top, left: r.left }}>
+              {r.label}
+            </span>
+          ))}
+        </div>
         <div className="hero-content">
           <p className="eyebrow light">Private endurance coaching · 800m to Ironman</p>
           <h1>
@@ -21,8 +48,9 @@ export function Home() {
             Thoughtful, one-to-one coaching built around your physiology, your ambition, and the life
             you actually live.
           </p>
-          <Link className="button button-light" href="/book"><ButtonShape index={2} />
-            Book a free consultation <span>↗</span>
+          <Link className="button button-light" href="/book">
+            <PatternTile pattern="cells" cell={7} className="btn-pattern" />
+            <span className="btn-label">Book a free consultation</span> <span>↗</span>
           </Link>
         </div>
         <div className="hero-stats">
@@ -41,10 +69,10 @@ export function Home() {
         </div>
       </section>
 
-      <section className="intro section-pad">
+      <section id="who" className="intro section-pad" data-pattern="lens">
         <div className="section-label">01 / Who we coach</div>
         <div className="intro-copy">
-          <h2>Serious about your goals. <em>Not at the expense of your life.</em></h2>
+          <ScrubText as="h2" text="Serious about your goals. Not at the expense of your life." accentFrom={4} />
           <p>
             We coach curious, committed athletes—from first-time half marathoners to seasoned
             triathletes—who want a smarter path forward. No templates. No noise. Just training that
@@ -56,29 +84,23 @@ export function Home() {
         </div>
       </section>
 
-      <section className="disciplines">
-        <article>
-          <span>01</span>
-          <div className="discipline-icon track-icon" />
-          <h3>Track</h3>
-          <p>800m · 1500m · 5K</p>
-        </article>
-        <article>
-          <span>02</span>
-          <div className="discipline-icon road-icon" />
-          <h3>Road</h3>
-          <p>10K · Half · Marathon</p>
-        </article>
-        <article>
-          <span>03</span>
-          <div className="discipline-icon tri-icon">△</div>
-          <h3>Triathlon</h3>
-          <p>Sprint · Olympic · Long course</p>
-        </article>
+      <section id="disciplines" className="disciplines" data-pattern="lens">
+        {[
+          { n: '01', name: 'Track', detail: '800m · 1500m · 5K', pattern: 'rings' as const },
+          { n: '02', name: 'Road', detail: '10K · Half · Marathon', pattern: 'flow' as const },
+          { n: '03', name: 'Triathlon', detail: 'Sprint · Olympic · Long course', pattern: 'burst' as const },
+        ].map((d) => (
+          <Link key={d.name} href="/coaches" className="discipline">
+            <PatternTile pattern={d.pattern} cell={16} className="discipline-art" />
+            <span className="discipline-n">{d.n}</span>
+            <h3>{d.name}</h3>
+            <p>{d.detail}</p>
+            <span className="discipline-go" aria-hidden="true">Meet the coaches →</span>
+          </Link>
+        ))}
       </section>
 
-      <section className="ink-section section-pad">
-        <ShapeField variant="band" />
+      <section id="picture-it" className="ink-section section-pad" data-pattern="tiles">
         <div className="ink-copy">
           <p className="eyebrow light">02 / Picture it</p>
           <h2>Sketch your <em>finish line.</em></h2>
@@ -91,12 +113,15 @@ export function Home() {
         <InkCanvas />
       </section>
 
-      <section className="quote-section section-pad">
-        <ShapeField variant="band" />
+      <section id="long-view" className="quote-section section-pad" data-pattern="burst">
         <p className="eyebrow">The long view</p>
-        <blockquote>“The best plan is the one that makes you stronger—and keeps you wanting to come back.”</blockquote>
-        <Link className="button button-dark" href="/coaches"><ButtonShape index={3} />
-          Meet the team <span>→</span>
+        <ScrubText
+          as="blockquote"
+          text="“The best plan is the one that makes you stronger—and keeps you wanting to come back.”"
+        />
+        <Link className="button button-dark" href="/coaches">
+          <PatternTile pattern="cells" cell={7} className="btn-pattern" />
+          <span className="btn-label">Meet the team</span> <span>→</span>
         </Link>
       </section>
     </main>

@@ -1,5 +1,4 @@
 import { principles } from '../content'
-import { QuarterShape, ButtonShape, ShapeField } from '../components/Shapes'
 
 const steps = [
   ['Listen', 'We begin with your history, motivations, constraints, and the athlete you want to become.'],
@@ -10,13 +9,12 @@ const steps = [
 export function Philosophy() {
   return (
     <main className="inner-page philosophy-page">
-      <section className="page-hero">
-        <ShapeField variant="page" />
+      <section className="page-hero" data-pattern="lens">
         <p className="eyebrow">How we work</p>
         <h1>Built for progress. <em>Designed to last.</em></h1>
         <p>Science gives us direction. Conversation gives it meaning.</p>
       </section>
-      <section className="process section-pad">
+      <section className="process section-pad" data-pattern="flow">
         <div className="section-label">Our process</div>
         <div className="process-steps">
           {steps.map(([step, text], index) => (
@@ -28,8 +26,7 @@ export function Philosophy() {
           ))}
         </div>
       </section>
-      <section className="principles section-pad">
-        <QuarterShape className="shape-accent principles-quarter" />
+      <section className="principles section-pad" data-pattern="tiles">
         <p className="eyebrow light">Four principles</p>
         <div>
           {principles.map(([title, text], index) => (

@@ -1,12 +1,12 @@
+import { PatternTile } from '../components/PatternTile'
+import { ScrubText } from '../components/ScrubText'
 import { coaches } from '../content'
 import { Link } from '../components/Link'
-import { HalfMoonsShape, ShapeField } from '../components/Shapes'
 
 export function Coaches() {
   return (
     <main className="inner-page">
-      <section className="page-hero">
-        <ShapeField variant="page" />
+      <section className="page-hero" data-pattern="cells">
         <p className="eyebrow">The people in your corner</p>
         <h1>Coaching is personal. <em>So are we.</em></h1>
         <p>Experienced athletes, attentive listeners, and students of the sport.</p>
@@ -15,6 +15,7 @@ export function Coaches() {
         {coaches.map((coach, index) => (
           <article className="coach-card" key={coach.name}>
             <div className={`coach-portrait portrait-${index + 1}`}>
+              <PatternTile pattern={index % 2 ? 'lens' : 'cells'} cell={18} className="portrait-pattern" />
               <span>{coach.initials}</span>
               <small>{coach.specialty}</small>
             </div>
@@ -31,8 +32,7 @@ export function Coaches() {
         ))}
       </section>
       <section className="statement">
-        <HalfMoonsShape className="shape-accent statement-moons" />
-        <p>One athlete. One coach. One evolving conversation.</p>
+        <ScrubText as="p" text="One athlete. One coach. One evolving conversation." />
       </section>
     </main>
   )
