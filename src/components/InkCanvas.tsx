@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react'
  * A small ink-style drawing pad, our own (chosen over embedding Ink Draw).
  */
 const INKS = [
-  { name: 'Amber', value: '#ffb454' },
-  { name: 'Cream', value: '#f1d4a4' },
-  { name: 'Rust', value: '#ff7a2f' },
+  { name: 'Silver', value: '#dfe6ea' },
+  { name: 'Pearl', value: '#ffffff' },
+  { name: 'Ice', value: '#a9cfe2' },
   { name: 'Mist', value: '#9fb3ba' },
 ]
 

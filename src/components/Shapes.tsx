@@ -80,3 +80,70 @@ export function HalfMoonsShape({ className }: ShapeProps) {
 }
 
 export const resourceShapes = [BloomShape, ArchShape, WaveShape, SparkShape, QuarterShape, HalfMoonsShape]
+
+type FieldShape = {
+  shape: (props: ShapeProps) => React.JSX.Element
+  /** Position and size as CSS lengths. */
+  top: string
+  left: string
+  size: string
+  /** How strongly it follows the cursor and scroll (negative moves the other way). */
+  depth: number
+  /** Degrees it turns per 1000px scrolled. */
+  spin?: number
+  tone?: 'bright' | 'mid' | 'dim' | 'outline'
+}
+
+const fields: Record<string, FieldShape[]> = {
+  hero: [
+    { shape: BloomShape, top: '14%', left: '58%', size: 'clamp(70px, 8vw, 120px)', depth: 34, spin: 60, tone: 'mid' },
+    { shape: ArchShape, top: '64%', left: '44%', size: 'clamp(60px, 6vw, 96px)', depth: -22, tone: 'dim' },
+    { shape: QuarterShape, top: '8%', left: '86%', size: 'clamp(80px, 9vw, 140px)', depth: 18, spin: -40, tone: 'dim' },
+    { shape: WaveShape, top: '42%', left: '74%', size: 'clamp(54px, 5vw, 80px)', depth: -40, tone: 'outline' },
+    { shape: HalfMoonsShape, top: '30%', left: '93%', size: 'clamp(40px, 4vw, 64px)', depth: 50, spin: 90, tone: 'bright' },
+  ],
+  page: [
+    { shape: SparkShape, top: '18%', left: '72%', size: 'clamp(46px, 5vw, 80px)', depth: 40, spin: 120, tone: 'bright' },
+    { shape: BloomShape, top: '52%', left: '84%', size: 'clamp(90px, 11vw, 170px)', depth: -24, spin: 50, tone: 'dim' },
+    { shape: ArchShape, top: '62%', left: '60%', size: 'clamp(50px, 5vw, 84px)', depth: 26, tone: 'mid' },
+    { shape: HalfMoonsShape, top: '10%', left: '92%', size: 'clamp(40px, 4vw, 60px)', depth: -36, spin: -80, tone: 'outline' },
+  ],
+  band: [
+    { shape: QuarterShape, top: '12%', left: '4%', size: 'clamp(60px, 7vw, 110px)', depth: 22, spin: 40, tone: 'dim' },
+    { shape: SparkShape, top: '70%', left: '90%', size: 'clamp(36px, 3.5vw, 56px)', depth: -34, spin: 140, tone: 'bright' },
+    { shape: WaveShape, top: '18%', left: '84%', size: 'clamp(60px, 6vw, 96px)', depth: 30, tone: 'outline' },
+    { shape: BloomShape, top: '66%', left: '10%', size: 'clamp(44px, 4vw, 70px)', depth: -26, spin: -70, tone: 'mid' },
+  ],
+}
+
+/**
+ * A layer of shapes that drift with the cursor and turn as the page scrolls.
+ * Place inside a positioned section; it sits behind the section's content.
+ */
+export function ShapeField({ variant }: { variant: keyof typeof fields }) {
+  return (
+    <div className="shape-field" data-parallax aria-hidden="true">
+      {fields[variant].map(({ shape: Shape, top, left, size, depth, spin = 0, tone = 'mid' }, i) => (
+        <span
+          key={i}
+          className={`field-shape tone-${tone}`}
+          style={{ top, left, width: size, ['--d' as string]: depth, ['--spin' as string]: spin, ['--i' as string]: i }}
+        >
+          <Shape />
+        </span>
+      ))}
+    </div>
+  )
+}
+
+const buttonShapes = [SparkShape, BloomShape, HalfMoonsShape, QuarterShape]
+
+/** A small shape that lives inside a button: it turns with scrolling and leans toward the cursor. */
+export function ButtonShape({ index = 0 }: { index?: number }) {
+  const Shape = buttonShapes[index % buttonShapes.length]
+  return (
+    <i className="btn-shape" aria-hidden="true">
+      <Shape />
+    </i>
+  )
+}

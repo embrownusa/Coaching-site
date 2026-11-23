@@ -1,11 +1,12 @@
 import { site } from '../config'
 import { Link } from '../components/Link'
-import { BloomShape } from '../components/Shapes'
+import { BloomShape, ButtonShape, ShapeField } from '../components/Shapes'
 
 export function Book() {
   return (
     <main className="inner-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">Free 20-minute consultation</p>
         <h1>Pick a time. <em>Let’s talk.</em></h1>
         <p>A relaxed conversation about your goals, your training history and your week. No pressure, no sales pitch.</p>
@@ -35,7 +36,7 @@ export function Book() {
               Until then, send us a quick note with a few times that suit you and we’ll confirm a slot
               within two working days.
             </p>
-            <Link className="button button-light" href="/contact?type=consultation">
+            <Link className="button button-light" href="/contact?type=consultation"><ButtonShape index={6} />
               Request a consultation <span>↗</span>
             </Link>
           </div>

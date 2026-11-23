@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { startMotion } from './motion'
 import { Footer, Header } from './components/Layout'
 import { PREVIEW_MODE, useRoute } from './router'
 import { Home } from './pages/Home'
@@ -26,6 +27,8 @@ const titles: Record<string, string> = {
 
 export default function App() {
   const route = useRoute()
+
+  useEffect(() => startMotion(), [])
 
   useEffect(() => {
     if (route.page === 'article') {

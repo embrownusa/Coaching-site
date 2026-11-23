@@ -1,5 +1,5 @@
 import { principles } from '../content'
-import { QuarterShape } from '../components/Shapes'
+import { QuarterShape, ButtonShape, ShapeField } from '../components/Shapes'
 
 const steps = [
   ['Listen', 'We begin with your history, motivations, constraints, and the athlete you want to become.'],
@@ -11,6 +11,7 @@ export function Philosophy() {
   return (
     <main className="inner-page philosophy-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">How we work</p>
         <h1>Built for progress. <em>Designed to last.</em></h1>
         <p>Science gives us direction. Conversation gives it meaning.</p>

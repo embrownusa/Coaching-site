@@ -3,7 +3,7 @@ import { coaches } from '../content'
 import { submitForm, type SubmitResult } from '../forms'
 import { site } from '../config'
 import { currentSearch } from '../router'
-import { SparkShape } from '../components/Shapes'
+import { SparkShape, ButtonShape, ShapeField } from '../components/Shapes'
 
 const disciplines = ['Track (800m–5K)', 'Road (10K–marathon)', 'Triathlon', 'Not sure yet']
 
@@ -53,6 +53,7 @@ export function Contact() {
     return (
       <main className="inner-page">
         <section className="page-hero">
+        <ShapeField variant="page" />
           <p className="eyebrow">Message received</p>
           <h1>Thank you, <em>{form.name.split(' ')[0] || 'friend'}.</em></h1>
           <p>We read every note personally and will reply within two working days.</p>
@@ -64,6 +65,7 @@ export function Contact() {
   return (
     <main className="inner-page contact-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">Work with us</p>
         <h1>Let’s start <em>the conversation.</em></h1>
         <p>
@@ -133,7 +135,7 @@ export function Contact() {
               </label>
             ))}
           </fieldset>
-          <button className="button button-light" type="submit" disabled={status === 'sending'}>
+          <button className="button button-light" type="submit" disabled={status === 'sending'}><ButtonShape index={7} />
             {status === 'sending' ? 'Sending…' : 'Send message'} <span>↗</span>
           </button>
           {status === 'mailto' && (

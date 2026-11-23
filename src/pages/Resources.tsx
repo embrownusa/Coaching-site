@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { articles } from '../content'
 import { Link } from '../components/Link'
-import { resourceShapes } from '../components/Shapes'
+import { resourceShapes, ButtonShape, ShapeField } from '../components/Shapes'
 import { submitForm } from '../forms'
 import { NotFound } from './NotFound'
 
@@ -66,6 +66,7 @@ export function Resources() {
   return (
     <main className="inner-page resources-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">Field notes</p>
         <h1>Ideas for the <em>long run.</em></h1>
         <p>Practical thinking on training, racing, recovery, and the athlete’s life.</p>
@@ -108,7 +109,7 @@ export function Resources() {
             and current schedule—then help you decide on the right next step.
           </p>
         </div>
-        <Link className="button button-light" href="/book">
+        <Link className="button button-light" href="/book"><ButtonShape index={8} />
           Book a free consultation <span>↗</span>
         </Link>
       </section>
@@ -126,6 +127,7 @@ export function ArticlePage({ slug }: { slug: string }) {
   return (
     <main className="inner-page article-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">{article.category} · {article.time}</p>
         <h1>{article.title}</h1>
       </section>

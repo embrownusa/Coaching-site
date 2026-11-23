@@ -1,7 +1,7 @@
 import heroImage from '../assets/endurance-hero.jpg'
 import { Link } from '../components/Link'
 import { InkCanvas } from '../components/InkCanvas'
-import { ArchShape, BloomShape, SparkShape, WaveShape } from '../components/Shapes'
+import { ButtonShape, ShapeField } from '../components/Shapes'
 
 export function Home() {
   return (
@@ -9,7 +9,7 @@ export function Home() {
       <section className="hero">
         <img src={heroImage} alt="Distance runner training on a mountain road at dawn" />
         <div className="hero-shade" />
-        <SparkShape className="shape-accent hero-spark" />
+        <ShapeField variant="hero" />
         <div className="hero-content">
           <p className="eyebrow light">Private endurance coaching · 800m to Ironman</p>
           <h1>
@@ -21,7 +21,7 @@ export function Home() {
             Thoughtful, one-to-one coaching built around your physiology, your ambition, and the life
             you actually live.
           </p>
-          <Link className="button button-light" href="/book">
+          <Link className="button button-light" href="/book"><ButtonShape index={2} />
             Book a free consultation <span>↗</span>
           </Link>
         </div>
@@ -78,7 +78,7 @@ export function Home() {
       </section>
 
       <section className="ink-section section-pad">
-        <BloomShape className="shape-accent ink-bloom" />
+        <ShapeField variant="band" />
         <div className="ink-copy">
           <p className="eyebrow light">02 / Picture it</p>
           <h2>Sketch your <em>finish line.</em></h2>
@@ -92,11 +92,10 @@ export function Home() {
       </section>
 
       <section className="quote-section section-pad">
-        <ArchShape className="shape-accent quote-arch" />
-        <WaveShape className="shape-accent quote-wave" />
+        <ShapeField variant="band" />
         <p className="eyebrow">The long view</p>
         <blockquote>“The best plan is the one that makes you stronger—and keeps you wanting to come back.”</blockquote>
-        <Link className="button button-dark" href="/coaches">
+        <Link className="button button-dark" href="/coaches"><ButtonShape index={3} />
           Meet the team <span>→</span>
         </Link>
       </section>

@@ -1,11 +1,12 @@
 import { coaches } from '../content'
 import { Link } from '../components/Link'
-import { HalfMoonsShape } from '../components/Shapes'
+import { HalfMoonsShape, ShapeField } from '../components/Shapes'
 
 export function Coaches() {
   return (
     <main className="inner-page">
       <section className="page-hero">
+        <ShapeField variant="page" />
         <p className="eyebrow">The people in your corner</p>
         <h1>Coaching is personal. <em>So are we.</em></h1>
         <p>Experienced athletes, attentive listeners, and students of the sport.</p>
