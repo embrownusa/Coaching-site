@@ -22,10 +22,10 @@ export function Coaches() {
             <p className="eyebrow royal">{coach.role}</p>
             <h2 className="royal">{coach.name}</h2>
             <p className="bio">{coach.bio}</p>
-            <ul>
+            <ul className="royal">
               {coach.credentials.map((item) => <li key={item}>{item}</li>)}
             </ul>
-            <Link className="text-link coach-link" href={`/contact?coach=${encodeURIComponent(coach.name)}`}>
+            <Link className="text-link coach-link royal" href={`/contact?coach=${encodeURIComponent(coach.name)}`}>
               Train with {coach.name.split(' ')[0]} <span>→</span>
             </Link>
           </article>
