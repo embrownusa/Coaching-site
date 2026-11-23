@@ -56,11 +56,11 @@ export function Home() {
         <div className="hero-stats">
           <div>
             <strong>17+</strong>
-            <span>Years coaching</span>
+            <span>Years collegiate &amp; professional coaching experience</span>
           </div>
           <div>
-            <strong>240</strong>
-            <span>Finish lines crossed</span>
+            <strong>26</strong>
+            <span>Years competitive experience combined</span>
           </div>
           <div>
             <strong>100%</strong>
