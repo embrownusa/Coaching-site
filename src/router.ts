@@ -7,6 +7,10 @@ export type Route =
   | { page: 'resources' }
   | { page: 'article'; slug: string }
   | { page: 'contact' }
+  | { page: 'book' }
+  | { page: 'plans' }
+  | { page: 'login' }
+  | { page: 'account' }
   | { page: 'not-found' }
 
 export function parsePath(pathname: string): Route {
@@ -14,8 +18,9 @@ export function parsePath(pathname: string): Route {
   if (parts.length === 0) return { page: 'home' }
   const [first, second] = parts
   if (first === 'resources' && second) return { page: 'article', slug: second }
-  if (parts.length === 1 && ['coaches', 'philosophy', 'resources', 'contact'].includes(first)) {
-    return { page: first as 'coaches' | 'philosophy' | 'resources' | 'contact' }
+  const simple = ['coaches', 'philosophy', 'resources', 'contact', 'book', 'plans', 'login', 'account'] as const
+  if (parts.length === 1 && (simple as readonly string[]).includes(first)) {
+    return { page: first as (typeof simple)[number] }
   }
   return { page: 'not-found' }
 }

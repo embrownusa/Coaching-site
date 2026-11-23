@@ -107,8 +107,8 @@ export function Resources() {
             and current schedule—then help you decide on the right next step.
           </p>
         </div>
-        <Link className="button button-light" href="/contact?type=consultation">
-          Request consultation <span>↗</span>
+        <Link className="button button-light" href="/book">
+          Book a free call <span>↗</span>
         </Link>
       </section>
       <Newsletter />

@@ -7,6 +7,10 @@ import { Philosophy } from './pages/Philosophy'
 import { Resources, ArticlePage } from './pages/Resources'
 import { Contact } from './pages/Contact'
 import { NotFound } from './pages/NotFound'
+import { Book } from './pages/Book'
+import { Plans } from './pages/Plans'
+import { Login } from './pages/Login'
+import { Account } from './pages/Account'
 import { articles } from './content'
 
 const titles: Record<string, string> = {
@@ -15,6 +19,10 @@ const titles: Record<string, string> = {
   philosophy: 'Philosophy · Last Mile Endurance',
   resources: 'Resources · Last Mile Endurance',
   contact: 'Work with us · Last Mile Endurance',
+  book: 'Book a call · Last Mile Endurance',
+  plans: 'Coaching plans · Last Mile Endurance',
+  login: 'Client login · Last Mile Endurance',
+  account: 'My training · Last Mile Endurance',
   'not-found': 'Page not found · Last Mile Endurance',
 }
 
@@ -41,6 +49,10 @@ export default function App() {
         {route.page === 'resources' && <Resources />}
         {route.page === 'article' && <ArticlePage slug={route.slug} />}
         {route.page === 'contact' && <Contact />}
+        {route.page === 'book' && <Book />}
+        {route.page === 'plans' && <Plans />}
+        {route.page === 'login' && <Login />}
+        {route.page === 'account' && <Account />}
         {route.page === 'not-found' && <NotFound />}
       </div>
       <Footer />

@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import type { Route } from '../router'
 import { Link } from './Link'
+import { useUser } from '../auth'
 
 const navItems = [
   { label: 'Home', href: '/', page: 'home' },
   { label: 'Coaches', href: '/coaches', page: 'coaches' },
   { label: 'Philosophy', href: '/philosophy', page: 'philosophy' },
   { label: 'Resources', href: '/resources', page: 'resources' },
+  { label: 'Plans', href: '/plans', page: 'plans' },
 ] as const
 
 export function Wordmark() {
@@ -28,6 +30,7 @@ export function Wordmark() {
 export function Header({ route }: { route: Route }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const current = route.page === 'article' ? 'resources' : route.page
+  const user = useUser()
   const close = () => setMenuOpen(false)
 
   return (
@@ -56,8 +59,15 @@ export function Header({ route }: { route: Route }) {
             {item.label}
           </Link>
         ))}
-        <Link className="nav-cta" href="/contact" onClick={close}>
-          Work with us <span>↗</span>
+        <Link
+          href={user ? '/account' : '/login'}
+          className={`nav-link ${current === 'login' || current === 'account' ? 'active' : ''}`}
+          onClick={close}
+        >
+          {user ? 'My training' : 'Client login'}
+        </Link>
+        <Link className="nav-cta" href="/book" onClick={close}>
+          Book a call <span>↗</span>
         </Link>
       </nav>
     </header>
@@ -73,7 +83,7 @@ export function Footer() {
           <p className="eyebrow">Ready when you are</p>
           <h2>Your next finish line starts here.</h2>
         </div>
-        <Link className="circle-link" href="/contact">
+        <Link className="circle-link" href="/book">
           Let’s talk <span>↗</span>
         </Link>
       </div>
@@ -85,7 +95,9 @@ export function Footer() {
               {item.label}
             </Link>
           ))}
+          <Link href="/book">Book a call</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/login">Client login</Link>
         </div>
         <span>Run with purpose.</span>
       </div>

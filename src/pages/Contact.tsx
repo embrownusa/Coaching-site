@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { coaches } from '../content'
+import { coaches, plans } from '../content'
 import { submitForm, type SubmitResult } from '../forms'
 import { site } from '../config'
 import { SparkShape } from '../components/Shapes'
@@ -10,6 +10,7 @@ export function Contact() {
   const params = new URLSearchParams(window.location.search)
   const initialCoach = coaches.some((c) => c.name === params.get('coach')) ? params.get('coach')! : 'No preference'
   const isConsultation = params.get('type') === 'consultation'
+  const planName = plans.find((p) => p.id === params.get('plan'))?.name ?? ''
 
   const [form, setForm] = useState({
     name: '',
@@ -38,6 +39,7 @@ export function Contact() {
           'Goal race or event': form.goal,
           'Preferred coach': form.coach,
           'Free consultation': form.consultation,
+          'Plan interest': planName,
           Message: form.message,
         },
       )
@@ -64,7 +66,10 @@ export function Contact() {
       <section className="page-hero">
         <p className="eyebrow">Work with us</p>
         <h1>Let’s start <em>the conversation.</em></h1>
-        <p>Tell us a little about you and what you’re training for. We’ll be in touch within two working days.</p>
+        <p>
+          {planName ? `Interested in ${planName}? ` : ''}Tell us a little about you and what you’re training for.
+          We’ll be in touch within two working days.
+        </p>
       </section>
       <section className="contact-layout section-pad">
         <aside className="contact-aside">

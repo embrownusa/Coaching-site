@@ -101,3 +101,42 @@ export const articles: Article[] = [
     ],
   },
 ]
+
+export type Plan = {
+  id: string
+  name: string
+  /** Placeholder prices: set the real ones here and in Stripe. */
+  price: string
+  cadence: string
+  summary: string
+  features: string[]
+  featured?: boolean
+}
+
+export const plans: Plan[] = [
+  {
+    id: 'plan-review',
+    name: 'Plan Review',
+    price: '$95',
+    cadence: 'one time',
+    summary: 'A coach reviews your current training and race plan, then talks it through with you.',
+    features: ['45-minute video call', 'Written notes on your plan', 'Race-day pacing guidance'],
+  },
+  {
+    id: 'monthly',
+    name: 'Monthly Coaching',
+    price: '$225',
+    cadence: 'per month',
+    summary: 'Ongoing one-to-one coaching with a plan that adapts to you every week.',
+    features: ['Individual weekly training plan', 'Unlimited messaging with your coach', 'Monthly check-in call', 'Race strategy for every goal event'],
+    featured: true,
+  },
+  {
+    id: 'race-block',
+    name: 'Race Block',
+    price: '$540',
+    cadence: '12 weeks',
+    summary: 'A focused build toward one goal race, from the first session to the finish line.',
+    features: ['12-week individual plan', 'Fortnightly check-in calls', 'Taper and race-week plan', 'Post-race debrief'],
+  },
+]

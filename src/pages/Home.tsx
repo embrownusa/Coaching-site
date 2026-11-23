@@ -21,8 +21,8 @@ export function Home() {
             Thoughtful, one-to-one coaching built around your physiology, your ambition, and the life
             you actually live.
           </p>
-          <Link className="button button-light" href="/contact">
-            Find your coach <span>↗</span>
+          <Link className="button button-light" href="/book">
+            Book a free call <span>↗</span>
           </Link>
         </div>
         <div className="hero-stats">

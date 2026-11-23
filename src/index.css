@@ -34,7 +34,7 @@
 .wordmark-mark i { display: block; width: 8px; height: 55%; border-radius: 8px; background: linear-gradient(90deg, #76523a, #fff0d0 48%, #9c7048); box-shadow: 0 0 16px rgba(255,176,83,.2); }
 .wordmark-mark i:nth-child(2) { height: 78%; }
 .wordmark-mark i:nth-child(3) { height: 100%; background: var(--rust); }
-.site-header nav { display: flex; align-items: center; gap: 30px; }
+.site-header nav { display: flex; align-items: center; gap: clamp(16px, 2vw, 30px); }
 .site-header nav .nav-link { color: #a7b4b9; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 10px 0; position: relative; text-decoration: none; transition: color .25s; }
 .site-header nav .nav-link:hover, .site-header nav .nav-link.active { color: #eef3f4; }
 .site-header nav .nav-link:after { content: ''; position: absolute; left: 0; right: 100%; bottom: 2px; height: 1px; background: currentColor; transition: right .25s; }
@@ -213,6 +213,60 @@
 .radio-row input { accent-color: var(--lime); width: 16px; height: 16px; }
 .contact-form .button { justify-self: start; margin-top: 4px; }
 
+/* Booking */
+.book-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: 7vw; align-items: start; }
+.book-bloom { width: 60px; right: 8%; top: -10px; color: rgba(255,176,83,.5); animation: spark-turn 30s linear infinite; }
+.booking-frame { border: 1px solid var(--line); border-radius: 40px 16px 40px 16px; overflow: hidden; background: #fff; }
+.booking-frame iframe { display: block; width: 100%; height: 720px; border: 0; }
+.booking-placeholder { border: 1px dashed rgba(255,201,139,.35); border-radius: 60px 20px 60px 20px; padding: 60px 5vw; background: radial-gradient(ellipse at 20% 0%, rgba(255,176,83,.08), transparent 50%), #070c10; }
+.booking-placeholder h2 { font-family: 'Instrument Serif'; font-weight: 400; font-size: clamp(36px, 4vw, 56px); line-height: 1; margin: 14px 0 18px; }
+.booking-placeholder > p:not(.eyebrow) { color: #8b9ba1; line-height: 1.7; max-width: 480px; }
+
+/* Plans */
+.plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; align-items: stretch; }
+.plan-card { position: relative; display: flex; flex-direction: column; padding: 40px 34px; border: 1px solid var(--line); border-radius: 60px 18px 60px 18px; background: linear-gradient(160deg, #10171b, #070b0d 70%); transition: transform .4s, box-shadow .4s; }
+.plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.35), 0 0 40px rgba(255,176,83,.06); }
+.plan-card.featured { border-color: rgba(255,180,84,.5); background: radial-gradient(ellipse at 80% 0%, rgba(255,176,83,.14), transparent 55%), linear-gradient(160deg, #15130f, #070b0d 70%); }
+.plan-badge { position: absolute; top: -12px; right: 34px; margin: 0; padding: 6px 12px; border-radius: 100px; background: var(--metal); color: #05090c; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.plan-price { font-family: 'Instrument Serif'; font-size: 64px; line-height: 1; margin: 14px 0 12px; }
+.plan-price span { font-family: 'DM Sans'; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #8fa0a7; }
+.plan-summary { color: #8b9ba1; line-height: 1.7; font-size: 14px; }
+.plan-card ul { list-style: none; padding: 0; margin: 18px 0 30px; border-top: 1px solid var(--line); flex: 1; }
+.plan-card li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13px; color: #b4c2c7; }
+.plan-card li:before { content: '◆'; color: var(--lime); font-size: 8px; margin-right: 12px; vertical-align: 2px; }
+.plan-card .button { align-self: flex-start; margin-top: 0; }
+.plans-note { padding-top: 0 !important; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; color: #8b9ba1; font-size: 13px; }
+.plans-note .text-link { margin: 0; }
+
+/* Login & client area */
+.login-section { display: grid; place-items: center; min-height: 70vh; background: radial-gradient(circle at 50% 20%, #17262d 0%, #05090c 55%); }
+.login-card { width: min(520px, 100%); padding: 56px 48px; border: 1px solid var(--line); border-radius: 70px 22px 70px 22px; background: rgba(7,12,16,.85); backdrop-filter: blur(10px); }
+.login-card h1 { font-family: 'Instrument Serif'; font-weight: 400; font-size: clamp(54px, 7vw, 84px); line-height: .9; margin: 18px 0 20px; }
+.login-card h1 em { color: var(--lime); }
+.login-copy { color: #8b9ba1; line-height: 1.7; font-size: 14px; }
+.login-card input { width: 100%; margin-top: 14px; background: #05090c; border: 1px solid var(--line); border-radius: 14px; color: #eef3f4; padding: 15px 16px; outline: 0; }
+.login-card input:focus { border-color: rgba(255,180,84,.6); box-shadow: 0 0 0 4px rgba(255,180,84,.08); }
+.login-card .button { margin-top: 20px; }
+.login-foot { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: #8b9ba1; }
+.login-foot a, .contact-email a { color: var(--lime); }
+.demo-note { margin-top: 18px; font-size: 12px; color: #c7a77c; background: rgba(255,176,83,.07); border: 1px solid rgba(255,176,83,.2); border-radius: 10px; padding: 9px 12px; display: inline-block; }
+.account-hero { padding-bottom: 80px !important; }
+.account-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 26px; align-items: start; }
+.account-side { display: grid; gap: 26px; }
+.account-panel { padding: 32px; border: 1px solid var(--line); border-radius: 36px 14px 36px 14px; background: #070c10; }
+.account-panel h2 { font-family: 'Instrument Serif'; font-weight: 400; font-size: 34px; margin: 10px 0 6px; }
+.account-panel > p:not(.eyebrow) { color: #8b9ba1; font-size: 14px; line-height: 1.6; }
+.account-panel .text-link { margin: 14px 0 0; }
+.coach-note { font-family: 'Instrument Serif'; font-style: italic; font-size: 22px !important; line-height: 1.35 !important; color: #e4d2b6 !important; }
+.week-list { list-style: none; padding: 0; margin: 18px 0 0; }
+.week-list li { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 16px 0; border-top: 1px solid var(--line); }
+.week-list li > span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--rust); }
+.week-list strong { display: block; font-weight: 500; color: #eef3f4; }
+.week-list small { display: block; color: #8b9ba1; font-size: 13px; margin-top: 3px; }
+.done-box input { color-scheme: dark; width: 20px; height: 20px; accent-color: var(--lime); cursor: pointer; }
+.sign-out { justify-self: start; border: 0; background: none; color: #8fa0a7; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 0; border-bottom: 1px solid currentColor; }
+.sign-out:hover { color: var(--lime); }
+
 footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 1px solid var(--line); }
 .footer-main { display: grid; grid-template-columns: 1fr 2fr auto; gap: 5vw; align-items: center; padding-bottom: 65px; }
 .footer-main h2 { font-family: 'Instrument Serif'; font-weight: 400; font-size: clamp(38px, 4.3vw, 64px); margin: 12px 0 0; max-width: 650px; }
@@ -295,6 +349,12 @@ footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 
   .contact-layout { grid-template-columns: 1fr; gap: 50px; }
   .field-row { grid-template-columns: 1fr; }
   .contact-form .button { width: 100%; }
+  .book-layout, .account-grid { grid-template-columns: 1fr; gap: 40px; }
+  .booking-frame iframe { height: 640px; }
+  .plan-grid { grid-template-columns: 1fr; gap: 34px; }
+  .login-card { padding: 42px 26px; border-radius: 44px 16px 44px 16px; }
+  .account-panel { padding: 26px 22px; }
+  .site-header nav .nav-link { font-size: 26px; }
   .footer-main { grid-template-columns: 1fr; }
   .circle-link { width: 110px; height: 110px; }
   .footer-bottom { gap: 20px; flex-wrap: wrap; }
