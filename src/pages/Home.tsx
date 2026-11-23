@@ -55,12 +55,10 @@ export function Home() {
         </div>
         <div className="hero-stats">
           <div>
-            <strong>17+</strong>
-            <span>Years collegiate &amp; professional coaching experience</span>
+            <strong className="stat-words">Collegiate &amp; professional coaching experience</strong>
           </div>
           <div>
-            <strong>26</strong>
-            <span>Years competitive experience combined</span>
+            <strong className="stat-words">Science based</strong>
           </div>
           <div>
             <strong>100%</strong>

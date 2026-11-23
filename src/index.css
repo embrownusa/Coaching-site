@@ -414,3 +414,7 @@ option { color: var(--blue); }
 
 /* Lines Emily picked out in royal blue (accent words keep their own color). */
 .royal, .eyebrow.royal { color: var(--royal); }
+
+/* Hero stats written as words instead of numbers. */
+.hero-stats strong.stat-words { font-size: 22px; line-height: 1.15; }
+@media (max-width: 850px) { .hero-stats strong.stat-words { font-size: 15px; } }
