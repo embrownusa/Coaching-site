@@ -394,6 +394,7 @@ footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 
 
 @media (max-width: 1100px) {
   .section-guide .label { display: none; }
+  .pace-readout { display: none; }
 }
 @media (max-width: 850px) {
   .section-guide, .scroll-gauge, .pace-readout { display: none; }
@@ -416,5 +417,6 @@ option { color: var(--blue); }
 .royal, .eyebrow.royal { color: var(--royal); }
 
 /* Hero stats written as words instead of numbers. */
-.hero-stats strong.stat-words { font-size: 22px; line-height: 1.15; }
-@media (max-width: 850px) { .hero-stats strong.stat-words { font-size: 15px; } }
+.hero-stats .stat-word-box { display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero-stats strong.stat-words { font-size: 30px; line-height: 1.05; }
+@media (max-width: 850px) { .hero-stats strong.stat-words { font-size: 21px; } }

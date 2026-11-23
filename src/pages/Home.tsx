@@ -54,10 +54,10 @@ export function Home() {
           </Link>
         </div>
         <div className="hero-stats">
-          <div>
-            <strong className="stat-words">Collegiate &amp; professional coaching experience</strong>
+          <div className="stat-word-box">
+            <strong className="stat-words">For athletes, by athletes</strong>
           </div>
-          <div>
+          <div className="stat-word-box">
             <strong className="stat-words">Science based</strong>
           </div>
           <div>
