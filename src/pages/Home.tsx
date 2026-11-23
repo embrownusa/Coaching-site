@@ -22,7 +22,7 @@ export function Home() {
             you actually live.
           </p>
           <Link className="button button-light" href="/book">
-            Book a free call <span>↗</span>
+            Book a free consultation <span>↗</span>
           </Link>
         </div>
         <div className="hero-stats">

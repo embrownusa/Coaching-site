@@ -12,21 +12,21 @@ npm run build    # production files in dist/
 
 ## What's here
 
-- **Pages:** Home, Coaches, Philosophy, Resources (with a page per field note), Plans, Book a call, Contact, Client login, the client area, and a 404 page.
+- **Pages:** Home, Coaches, Philosophy, Resources (with a page per field note), Free consultation booking, Contact, Client login, the client area, and a 404 page.
 - **Contact form** (`/contact`): name, email, discipline, preferred coach, goal race, message, and a free-consultation option. Coach pages link straight to it with the coach pre-selected.
 - **Newsletter sign-up** on the Resources page.
-- **Forms:** set `VITE_FORM_ENDPOINT` (see `.env.example`) to send submissions to a form service such as Formspree. Until then, forms open the visitor's email app with their details filled in.
-- **Booking** (`/book`): set `VITE_BOOKING_URL` to a Cal.com or Calendly page and the calendar appears inline. Until then, the page offers a "request a call" form.
-- **Payments** (`/plans`): three plans (prices in `src/content.ts` are placeholders). Set a Stripe Payment Link per plan (`VITE_STRIPE_LINK_*`) and "Get started" goes to Stripe checkout. Until then it opens the contact form with the plan named.
-- **Client login** (`/login`, `/account`): sign-in and a client area with the week's training, next check-in, coach note and billing. It runs in **preview mode** (`src/auth.ts`): any email signs in and the data is sample data. Going live needs a login service such as Supabase; only `src/auth.ts` and the sample data in `src/pages/Account.tsx` change.
+- **Forms:** sent through Netlify Forms when the site is on Netlify (or to `VITE_FORM_ENDPOINT` if set). Running locally, they open the visitor's email app instead.
+- **Consultation booking** (`/book`): set `VITE_BOOKING_URL` to a Cal.com or Calendly page and the calendar appears inline. Until then, the page offers a consultation request form. Booking is for free consultations only; coaches arrange client check-ins directly.
+- **Payments:** pricing is case by case, so no prices are listed. Coaches bill each client from Stripe; `VITE_STRIPE_PORTAL_URL` adds an invoices link to the client area.
+- **Client login** (`/login`, `/account`): email-link sign-in through Supabase, and a client area with the week's sessions (clients tick them off), next check-in, latest coach note and billing. Without Supabase settings it runs in **preview mode** with sample data. Database tables and privacy rules: `supabase/schema.sql`.
 - **Geometric accents** in the style of [Book of Shapes](https://bookofshapes.com) (free for commercial use) live in `src/components/Shapes.tsx`.
-- **Sketch pad** (`src/components/InkCanvas.tsx`): an ink-style drawing area on the home page, standing in for [Ink Draw](https://www.bubbbly.com/ink-draw).
+- **Sketch pad** (`src/components/InkCanvas.tsx`): our own ink-style drawing pad on the home page.
 
 ## Editing content
 
-- Site email, booking and Stripe settings: `src/config.ts` and `.env`
-- Coaches, principles, plans and field notes: `src/content.ts` (the field-note text is a draft to replace)
+- Site email and service settings: `src/config.ts` and `.env` (see `.env.example`)
+- Coaches, principles and field notes: `src/content.ts` (the field-note text is a draft to replace)
 
-## Hosting note
+## Going live
 
-Pages use clean URLs like `/coaches`, so the host must serve `index.html` for unknown paths (a one-line setting on Netlify, Vercel or Cloudflare Pages).
+The site is set up for Netlify (hosting, forms) and Supabase (client logins). Step-by-step: [SETUP.md](SETUP.md).

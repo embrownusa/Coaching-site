@@ -13,6 +13,15 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Form definitions for Netlify Forms. Keep field names in sync with src/pages/Contact.tsx and Resources.tsx. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="subject" /><input name="name" /><input name="email" /><input name="discipline" />
+      <input name="goal" /><input name="coach" /><input name="consultation" />
+      <textarea name="message"></textarea><input name="bot-field" />
+    </form>
+    <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="subject" /><input name="email" /><input name="bot-field" />
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -17,14 +17,14 @@ function ResourceArt({ index }: { index: number }) {
 
 function Newsletter() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'mailto' | 'error'>('idle')
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setStatus('sending')
     try {
-      await submitForm('Newsletter sign-up', { email })
-      setStatus('done')
+      const result = await submitForm('newsletter', 'Newsletter sign-up', { email })
+      setStatus(result === 'sent' ? 'done' : 'mailto')
       setEmail('')
     } catch {
       setStatus('error')
@@ -37,6 +37,7 @@ function Newsletter() {
         <p className="eyebrow">Occasional notes, thoughtfully sent</p>
         <h2>Keep the conversation going.</h2>
         {status === 'done' && <p className="form-note" role="status">Thanks. You’re on the list.</p>}
+        {status === 'mailto' && <p className="form-note" role="status">Your email app should open to finish signing up.</p>}
         {status === 'error' && <p className="form-note" role="alert">Something went wrong. Please try again.</p>}
       </div>
       <form onSubmit={onSubmit}>
@@ -108,7 +109,7 @@ export function Resources() {
           </p>
         </div>
         <Link className="button button-light" href="/book">
-          Book a free call <span>↗</span>
+          Book a free consultation <span>↗</span>
         </Link>
       </section>
       <Newsletter />

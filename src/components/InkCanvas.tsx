@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 /*
- * A small ink-style drawing pad. This is our own placeholder for the
- * interactive drawing element. If Ann Nguyen agrees to let us embed Ink Draw
- * (https://www.bubbbly.com/ink-draw), this component can be swapped for an
- * <iframe> with credit.
+ * A small ink-style drawing pad, our own (chosen over embedding Ink Draw).
  */
 const INKS = [
   { name: 'Amber', value: '#ffb454' },

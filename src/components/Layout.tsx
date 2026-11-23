@@ -8,7 +8,6 @@ const navItems = [
   { label: 'Coaches', href: '/coaches', page: 'coaches' },
   { label: 'Philosophy', href: '/philosophy', page: 'philosophy' },
   { label: 'Resources', href: '/resources', page: 'resources' },
-  { label: 'Plans', href: '/plans', page: 'plans' },
 ] as const
 
 export function Wordmark() {
@@ -67,7 +66,7 @@ export function Header({ route }: { route: Route }) {
           {user ? 'My training' : 'Client login'}
         </Link>
         <Link className="nav-cta" href="/book" onClick={close}>
-          Book a call <span>↗</span>
+          Free consultation <span>↗</span>
         </Link>
       </nav>
     </header>
@@ -95,7 +94,7 @@ export function Footer() {
               {item.label}
             </Link>
           ))}
-          <Link href="/book">Book a call</Link>
+          <Link href="/book">Free consultation</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/login">Client login</Link>
         </div>

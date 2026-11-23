@@ -8,7 +8,6 @@ export type Route =
   | { page: 'article'; slug: string }
   | { page: 'contact' }
   | { page: 'book' }
-  | { page: 'plans' }
   | { page: 'login' }
   | { page: 'account' }
   | { page: 'not-found' }
@@ -18,7 +17,7 @@ export function parsePath(pathname: string): Route {
   if (parts.length === 0) return { page: 'home' }
   const [first, second] = parts
   if (first === 'resources' && second) return { page: 'article', slug: second }
-  const simple = ['coaches', 'philosophy', 'resources', 'contact', 'book', 'plans', 'login', 'account'] as const
+  const simple = ['coaches', 'philosophy', 'resources', 'contact', 'book', 'login', 'account'] as const
   if (parts.length === 1 && (simple as readonly string[]).includes(first)) {
     return { page: first as (typeof simple)[number] }
   }
@@ -37,6 +36,8 @@ export function useRoute(): Route {
   useEffect(() => {
     const onPop = () => setRoute(parsePath(window.location.pathname))
     window.addEventListener('popstate', onPop)
+    // A child may have navigated during the first render, before this listener existed.
+    onPop()
     return () => window.removeEventListener('popstate', onPop)
   }, [])
   return route

@@ -9,15 +9,10 @@ export const site = {
   // Form service for the contact and newsletter forms. Without it, forms open
   // the visitor's email app.
   formEndpoint: (env.VITE_FORM_ENDPOINT as string | undefined) || '',
-  // Public scheduling page (Cal.com or Calendly) shown on /book.
+  // Public scheduling page (Cal.com or Calendly) for free consultations, shown on /book.
   bookingUrl: (env.VITE_BOOKING_URL as string | undefined) || '',
-  // Stripe customer portal link, so clients can manage billing.
+  // Stripe customer portal link, so clients can see invoices and update their card.
+  // Pricing is agreed case by case, so payments are sent per client from Stripe.
   stripePortalUrl: (env.VITE_STRIPE_PORTAL_URL as string | undefined) || '',
 }
 
-/** Stripe Payment Link for each plan, keyed by plan id (see content.ts). */
-export const stripeLinks: Record<string, string> = {
-  monthly: (env.VITE_STRIPE_LINK_MONTHLY as string | undefined) || '',
-  'race-block': (env.VITE_STRIPE_LINK_RACE_BLOCK as string | undefined) || '',
-  'plan-review': (env.VITE_STRIPE_LINK_PLAN_REVIEW as string | undefined) || '',
-}

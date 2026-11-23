@@ -3,11 +3,19 @@ import { site } from './config'
 export type SubmitResult = 'sent' | 'mailto'
 
 /**
- * Sends form data to the configured form service. When no service is set up
- * yet, opens the visitor's email app with the details filled in instead, so
- * the form still works before hosting is decided.
+ * Sends a form.
+ *
+ * 1. If VITE_FORM_ENDPOINT is set, posts JSON there (e.g. Formspree).
+ * 2. Otherwise posts to Netlify Forms. The matching hidden form definitions
+ *    live in index.html so Netlify can detect them at deploy time.
+ * 3. If that fails (for example when running locally), opens the visitor's
+ *    email app with the details filled in.
  */
-export async function submitForm(subject: string, fields: Record<string, string>): Promise<SubmitResult> {
+export async function submitForm(
+  formName: 'contact' | 'newsletter',
+  subject: string,
+  fields: Record<string, string>,
+): Promise<SubmitResult> {
   if (site.formEndpoint) {
     const response = await fetch(site.formEndpoint, {
       method: 'POST',
@@ -17,6 +25,18 @@ export async function submitForm(subject: string, fields: Record<string, string>
     if (!response.ok) throw new Error(`Form service answered ${response.status}`)
     return 'sent'
   }
+
+  try {
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': formName, subject, ...fields }).toString(),
+    })
+    if (response.ok) return 'sent'
+  } catch {
+    /* fall through to email */
+  }
+
   const body = Object.entries(fields)
     .filter(([, value]) => value.trim())
     .map(([key, value]) => `${key}: ${value}`)
