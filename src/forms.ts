@@ -1,4 +1,5 @@
 import { site } from './config'
+import { PREVIEW_MODE } from './router'
 
 export type SubmitResult = 'sent' | 'mailto'
 
@@ -16,6 +17,8 @@ export async function submitForm(
   subject: string,
   fields: Record<string, string>,
 ): Promise<SubmitResult> {
+  // The shareable preview can't send anything, so it just shows the thank-you state.
+  if (PREVIEW_MODE) return 'sent'
   if (site.formEndpoint) {
     const response = await fetch(site.formEndpoint, {
       method: 'POST',

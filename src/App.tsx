@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Footer, Header } from './components/Layout'
-import { useRoute } from './router'
+import { PREVIEW_MODE, useRoute } from './router'
 import { Home } from './pages/Home'
 import { Coaches } from './pages/Coaches'
 import { Philosophy } from './pages/Philosophy'
@@ -38,7 +38,10 @@ export default function App() {
 
   return (
     <div className="site-shell">
-      <a className="skip-link" href="#main">Skip to content</a>
+      {!PREVIEW_MODE && <a className="skip-link" href="#main">Skip to content</a>}
+      {PREVIEW_MODE && (
+        <p className="preview-bar">Preview · forms show their thank-you message but don’t send anything</p>
+      )}
       <Header route={route} />
       <div id="main">
         {route.page === 'home' && <Home />}

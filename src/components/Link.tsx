@@ -1,5 +1,5 @@
 import type { AnchorHTMLAttributes, MouseEvent } from 'react'
-import { navigate } from '../router'
+import { hrefFor, navigate } from '../router'
 
 /** An internal link that changes the page without a full reload. */
 export function Link({ href, onClick, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) {
@@ -9,5 +9,5 @@ export function Link({ href, onClick, ...rest }: AnchorHTMLAttributes<HTMLAnchor
     event.preventDefault()
     navigate(href)
   }
-  return <a href={href} onClick={handle} {...rest} />
+  return <a href={hrefFor(href)} onClick={handle} {...rest} />
 }

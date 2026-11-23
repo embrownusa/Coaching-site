@@ -2,12 +2,13 @@ import { useState, type FormEvent } from 'react'
 import { coaches } from '../content'
 import { submitForm, type SubmitResult } from '../forms'
 import { site } from '../config'
+import { currentSearch } from '../router'
 import { SparkShape } from '../components/Shapes'
 
 const disciplines = ['Track (800m–5K)', 'Road (10K–marathon)', 'Triathlon', 'Not sure yet']
 
 export function Contact() {
-  const params = new URLSearchParams(window.location.search)
+  const params = new URLSearchParams(currentSearch())
   const initialCoach = coaches.some((c) => c.name === params.get('coach')) ? params.get('coach')! : 'No preference'
   const isConsultation = params.get('type') === 'consultation'
 

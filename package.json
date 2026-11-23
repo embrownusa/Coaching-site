@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:preview": "tsc --noEmit && VITE_PREVIEW_MODE=1 vite build --base ./ --outDir preview-dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.2",
