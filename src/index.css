@@ -10,6 +10,7 @@
   --metal: linear-gradient(115deg, #ffffff 0%, #8e9aa1 24%, #dfe6ea 48%, #5f6b72 72%, #f7f9fa 100%);
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   --soft-text: #b4bec3;
+  --blue: #1d5fd1;
   /* Brushed graphite with a silver edge: keeps the gray text readable. */
   --metal-dark: linear-gradient(115deg, #3b444a 0%, #1b2125 26%, #4b555c 50%, #171c20 74%, #3a4349 100%);
   --silver-edge: inset 0 0 0 1px rgba(214,226,232,.38), inset 0 1px 0 rgba(255,255,255,.25);
@@ -29,7 +30,7 @@
 }
 
 .site-shell { min-height: 100vh; overflow-x: clip; position: relative; }
-.skip-link { position: absolute; left: 12px; top: 12px; z-index: 100; padding: 10px 14px; background: var(--lime); color: #3d474d; font-size: 12px; transform: translateY(-200%); }
+.skip-link { position: absolute; left: 12px; top: 12px; z-index: 100; padding: 10px 14px; background: var(--lime); color: var(--blue); font-size: 12px; transform: translateY(-200%); }
 .skip-link:focus { transform: none; }
 .site-header { position: sticky; top: 14px; z-index: 30; width: min(1240px, calc(100% - 32px)); height: 64px; margin: 14px auto 0; padding: 0 10px 0 22px; display: flex; align-items: center; justify-content: space-between; background: rgba(9,13,16,.62); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); border: 1px solid var(--line); border-radius: 100px; box-shadow: 0 10px 40px rgba(0,0,0,.35); }
 .logo-button { border: 0; background: transparent; color: inherit; padding: 0; text-align: left; text-decoration: none; }
@@ -377,7 +378,7 @@ footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 
 .section-guide .label { position: absolute; right: 38px; padding: 4px 8px; border-radius: 6px; background: rgba(7,11,14,.8); opacity: 0; transform: translateX(6px); transition: opacity .3s, transform .3s; white-space: nowrap; }
 .section-guide button:hover .label, .section-guide button.active .label { opacity: 1; transform: none; }
 .section-guide button.active { color: #eef3f4; }
-.section-guide button.active .node { background: #dfe6ea; color: #070b0e; transform: scale(1.12); }
+.section-guide button.active .node { background: #dfe6ea; color: var(--blue); transform: scale(1.12); }
 .scroll-gauge { position: fixed; right: 4px; top: 0; bottom: 0; width: 3px; z-index: 25; pointer-events: none; }
 .scroll-gauge i { display: block; width: 3px; height: 20%; border-radius: 3px; background: #dfe6ea; box-shadow: 0 0 10px rgba(223,230,234,.6); }
 .status-strip { position: fixed; left: 0; right: 0; bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 25; display: flex; justify-content: space-between; align-items: center; padding: 0 max(22px, env(safe-area-inset-right, 0px)) 0 max(22px, env(safe-area-inset-left, 0px)); pointer-events: none; }
@@ -406,3 +407,6 @@ footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 
   .is-magnet { transform: none !important; }
   .scrub > * { opacity: 1; }
 }
+
+/* Dropdown options render on a light list in some browsers: blue, never black. */
+option { color: var(--blue); }
