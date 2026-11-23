@@ -11,6 +11,7 @@
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   --soft-text: #b4bec3;
   --blue: #1d5fd1;
+  --royal: #4169e1;
   /* Brushed graphite with a silver edge: keeps the gray text readable. */
   --metal-dark: linear-gradient(115deg, #3b444a 0%, #1b2125 26%, #4b555c 50%, #171c20 74%, #3a4349 100%);
   --silver-edge: inset 0 0 0 1px rgba(214,226,232,.38), inset 0 1px 0 rgba(255,255,255,.25);
@@ -410,3 +411,6 @@ footer { background: #030608; color: white; padding: 75px 5vw 25px; border-top: 
 
 /* Dropdown options render on a light list in some browsers: blue, never black. */
 option { color: var(--blue); }
+
+/* Lines Emily picked out in royal blue (accent words keep their own color). */
+.royal, .eyebrow.royal { color: var(--royal); }

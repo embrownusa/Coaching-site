@@ -29,7 +29,7 @@ export function Book() {
         ) : (
           <div className="booking-placeholder">
             <p className="eyebrow light">Online booking coming soon</p>
-            <h2>Our calendar will appear here.</h2>
+            <h2 className="royal">Our calendar will appear here.</h2>
             <p>
               Until then, send us a quick note with a few times that suit you and we’ll confirm a slot
               within two working days.

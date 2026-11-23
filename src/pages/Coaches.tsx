@@ -19,8 +19,8 @@ export function Coaches() {
               <span>{coach.initials}</span>
               <small>{coach.specialty}</small>
             </div>
-            <p className="eyebrow">{coach.role}</p>
-            <h2>{coach.name}</h2>
+            <p className="eyebrow royal">{coach.role}</p>
+            <h2 className="royal">{coach.name}</h2>
             <p className="bio">{coach.bio}</p>
             <ul>
               {coach.credentials.map((item) => <li key={item}>{item}</li>)}

@@ -72,7 +72,7 @@ export function Home() {
       <section id="who" className="intro section-pad" data-pattern="lens">
         <div className="section-label">01 / Who we coach</div>
         <div className="intro-copy">
-          <ScrubText as="h2" text="Serious about your goals. Not at the expense of your life." accentFrom={4} />
+          <ScrubText as="h2" className="royal" text="Serious about your goals. Not at the expense of your life." accentFrom={4} />
           <p>
             We coach curious, committed athletes—from first-time half marathoners to seasoned
             triathletes—who want a smarter path forward. No templates. No noise. Just training that
@@ -103,7 +103,7 @@ export function Home() {
       <section id="picture-it" className="ink-section section-pad" data-pattern="tiles">
         <div className="ink-copy">
           <p className="eyebrow light">02 / Picture it</p>
-          <h2>Sketch your <em>finish line.</em></h2>
+          <h2 className="royal">Sketch your <em>finish line.</em></h2>
           <p>
             A goal you can see is a goal you can work toward. Draw the race you are dreaming of, the
             route you love, or the time on the clock. Save it and bring it to your first
@@ -117,6 +117,7 @@ export function Home() {
         <p className="eyebrow">The long view</p>
         <ScrubText
           as="blockquote"
+          className="royal"
           text="“The best plan is the one that makes you stronger—and keeps you wanting to come back.”"
         />
         <Link className="button button-dark" href="/coaches">
