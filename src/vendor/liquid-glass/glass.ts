@@ -19,6 +19,9 @@ import { fragmentShader } from './shader'
 
 export type GlassShape = 'pill' | 'circle'
 
+/** Moving canvases fixed behind the page, which the snapshot leaves out and each frame draws live. */
+const BACKDROPS = 'canvas.pattern-field, .shader-backdrop canvas'
+
 const vertexShader = `
   attribute vec2 a_position;
   attribute vec2 a_texcoord;
@@ -85,7 +88,7 @@ async function capture() {
         // Hide the glass itself and things pinned to the screen (menu bar, backdrop, the discipline
         // opening), which would otherwise be pasted into the page at one scroll spot. Hidden, not
         // removed, so the copy keeps exactly the same layout as the real page.
-        doc.querySelectorAll<HTMLElement>('.liquid-glass, .site-header, .pattern-field, .track-start, .replay-start').forEach((el) => {
+        doc.querySelectorAll<HTMLElement>('.liquid-glass, .site-header, .pattern-field, .shader-backdrop, .track-start, .replay-start').forEach((el) => {
           el.style.visibility = 'hidden'
         })
         // Wait for the web fonts in the copy too, or its text (and so the layout) comes out different.
@@ -315,10 +318,12 @@ export class LiquidGlass {
     const g = this.local.getContext('2d')!
     g.fillStyle = getComputedStyle(document.body).backgroundColor || '#000'
     g.fillRect(0, 0, rw, rh)
-    // The live backdrop canvas, fixed to the screen.
-    const field = document.querySelector<HTMLCanvasElement>('canvas.pattern-field')
-    if (field && field.width) {
+    // The live backdrops fixed to the screen, bottom first: the pattern field, then the home
+    // page's shader gradient (drawn with preserveDrawingBuffer so it can be read here).
+    for (const field of document.querySelectorAll<HTMLCanvasElement>(BACKDROPS)) {
+      if (!field.width || !field.height) continue
       const fb = field.getBoundingClientRect()
+      if (!fb.width || !fb.height) continue
       const sx = field.width / fb.width
       const sy = field.height / fb.height
       g.drawImage(field, (rx - fb.left) * sx, (ry - fb.top) * sy, rw * sx, rh * sy, 0, 0, rw, rh)

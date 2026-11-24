@@ -10,10 +10,13 @@
     "build:preview": "tsc --noEmit && VITE_PREVIEW_MODE=1 vite build --base ./ --outDir preview-dist"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.3.0",
+    "@shadergradient/react": "^2.4.20",
     "@supabase/supabase-js": "^2.119.2",
     "html2canvas": "^1.4.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

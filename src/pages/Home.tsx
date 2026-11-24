@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import heroImage from '../assets/endurance-hero.jpg'
 import { Link } from '../components/Link'
 import { GlassLink } from '../components/GlassLink'
@@ -23,9 +24,15 @@ const readings = [
   { label: 'Recovery', top: '17%', left: '84%' },
 ]
 
+// three.js is large, so the gradient loads on its own after the page.
+const ShaderBackdrop = lazy(() => import('../components/ShaderBackdrop'))
+
 export function Home() {
   return (
     <main className="home">
+      <Suspense fallback={null}>
+        <ShaderBackdrop />
+      </Suspense>
       <SectionGuide sections={sections} />
 
       <section id="start" className="hero" data-pattern="cells">
@@ -67,7 +74,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="who" className="intro section-pad plain-black" data-pattern="none">
+      <section id="who" className="intro section-pad" data-pattern="none">
         <div className="section-label">01 / Who we coach</div>
         <div className="intro-copy">
           <ScrubText as="h2" className="royal" text="Serious about your goals. Not at the expense of your life." accentFrom={4} />
@@ -82,7 +89,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="disciplines" className="disciplines plain-black" data-pattern="none">
+      <section id="disciplines" className="disciplines" data-pattern="none">
         {[
           { n: '01', name: 'Track', href: '/track', detail: '800m · 1500m · 5K', pattern: 'rings' as const },
           { n: '02', name: 'Road', href: '/road', detail: '10K · Half · Marathon', pattern: 'flow' as const },
@@ -98,7 +105,7 @@ export function Home() {
         ))}
       </section>
 
-      <section id="picture-it" className="ink-section section-pad plain-black" data-pattern="none">
+      <section id="picture-it" className="ink-section section-pad" data-pattern="none">
         <div className="ink-copy">
           <p className="eyebrow light">02 / Picture it</p>
           <h2 className="royal">Sketch your <em>finish line.</em></h2>
@@ -111,7 +118,7 @@ export function Home() {
         <InkCanvas />
       </section>
 
-      <section id="long-view" className="quote-section section-pad plain-black" data-pattern="none">
+      <section id="long-view" className="quote-section section-pad" data-pattern="none">
         <p className="eyebrow">The long view</p>
         <ScrubText
           as="blockquote"

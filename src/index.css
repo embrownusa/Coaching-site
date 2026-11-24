@@ -507,3 +507,8 @@ option { color: var(--blue); }
 .resources-page, .resources-page *:not(.liquid-glass-canvas),
 .process h2 { color: var(--soft-text) !important; }
 .resources-page ::placeholder { color: rgba(180,190,195,.6) !important; }
+
+/* Home: the blue and gray ShaderGradient behind the whole scrolling page (2026-11-23). */
+.shader-backdrop { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #0a1630; }
+.shader-backdrop canvas { display: block; }
+.home .disciplines { background: rgba(0,0,0,.18); }
