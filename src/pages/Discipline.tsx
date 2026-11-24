@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '../components/Link'
 import { PatternTile } from '../components/PatternTile'
+import { TrackStart } from '../components/TrackStart'
 import { coaches, disciplines } from '../content'
 import type { DisciplineSlug } from '../router'
 import stopwatchUrl from '../ascii/stopwatch.png'
@@ -48,6 +49,55 @@ function AsciiStage({ kind, label }: { kind: keyof typeof art; label: string }) 
 }
 
 export function Discipline({ slug }: { slug: DisciplineSlug }) {
+  // Track tries an interactive opening: press GO on the stopwatch to fire the starting pistol.
+  return slug === 'track' ? <InteractiveDiscipline slug={slug} /> : <ScrollDiscipline slug={slug} />
+}
+
+function InteractiveDiscipline({ slug }: { slug: DisciplineSlug }) {
+  const [phase, setPhase] = useState<'start' | 'revealing' | 'done'>('start')
+  const [run, setRun] = useState(0)
+
+  // Hold the page still and hide the menu until the start has been fired.
+  useEffect(() => {
+    const shell = document.querySelector('.site-shell')
+    const root = document.documentElement
+    if (phase === 'start') {
+      window.scrollTo(0, 0)
+      root.style.overflow = 'hidden'
+      shell?.classList.remove('past-stage')
+    } else {
+      root.style.overflow = ''
+      shell?.classList.add('past-stage')
+    }
+    return () => {
+      root.style.overflow = ''
+      shell?.classList.remove('past-stage')
+    }
+  }, [phase])
+
+  return (
+    <main className={`discipline-page is-interactive phase-${phase}`}>
+      {phase !== 'done' && (
+        <TrackStart key={run} onReveal={() => setPhase('revealing')} onDone={() => setPhase('done')} />
+      )}
+      <DisciplineBody slug={slug} />
+      {phase === 'done' && (
+        <button
+          type="button"
+          className="replay-start"
+          onClick={() => {
+            setRun((n) => n + 1)
+            setPhase('start')
+          }}
+        >
+          ↺ Replay the start
+        </button>
+      )}
+    </main>
+  )
+}
+
+function ScrollDiscipline({ slug }: { slug: DisciplineSlug }) {
   const d = disciplines[slug]
   const stage = useRef<HTMLElement>(null)
 
@@ -66,8 +116,6 @@ export function Discipline({ slug }: { slug: DisciplineSlug }) {
     }
   }, [])
 
-  const team = coaches.filter((c) => d.coaches.includes(c.name))
-
   return (
     <main className="discipline-page">
       <section ref={stage} className="ascii-stage">
@@ -80,6 +128,16 @@ export function Discipline({ slug }: { slug: DisciplineSlug }) {
           <span aria-hidden="true">↓</span>
         </a>
       </section>
+      <DisciplineBody slug={slug} />
+    </main>
+  )
+}
+
+function DisciplineBody({ slug }: { slug: DisciplineSlug }) {
+  const d = disciplines[slug]
+  const team = coaches.filter((c) => d.coaches.includes(c.name))
+  return (
+    <div className="discipline-body">
 
       <section id="discipline-intro" className="discipline-intro">
         <p className="eyebrow">{d.n} / {d.name} · {d.events}</p>
@@ -118,6 +176,6 @@ export function Discipline({ slug }: { slug: DisciplineSlug }) {
           <span className="btn-label">Book a free consultation</span> <span>↗</span>
         </Link>
       </section>
-    </main>
+    </div>
   )
 }
