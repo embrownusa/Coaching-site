@@ -67,7 +67,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="who" className="intro section-pad" data-pattern="lens">
+      <section id="who" className="intro section-pad plain-black" data-pattern="none">
         <div className="section-label">01 / Who we coach</div>
         <div className="intro-copy">
           <ScrubText as="h2" className="royal" text="Serious about your goals. Not at the expense of your life." accentFrom={4} />
@@ -82,7 +82,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="disciplines" className="disciplines" data-pattern="lens">
+      <section id="disciplines" className="disciplines plain-black" data-pattern="none">
         {[
           { n: '01', name: 'Track', href: '/track', detail: '800m · 1500m · 5K', pattern: 'rings' as const },
           { n: '02', name: 'Road', href: '/road', detail: '10K · Half · Marathon', pattern: 'flow' as const },
@@ -98,7 +98,7 @@ export function Home() {
         ))}
       </section>
 
-      <section id="picture-it" className="ink-section section-pad" data-pattern="tiles">
+      <section id="picture-it" className="ink-section section-pad plain-black" data-pattern="none">
         <div className="ink-copy">
           <p className="eyebrow light">02 / Picture it</p>
           <h2 className="royal">Sketch your <em>finish line.</em></h2>

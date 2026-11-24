@@ -7,7 +7,7 @@
  * (the full-page backdrop, a button, a card) can draw any of them.
  */
 
-export type PatternName = 'cells' | 'lens' | 'rings' | 'flow' | 'burst' | 'tiles'
+export type PatternName = 'cells' | 'lens' | 'rings' | 'flow' | 'burst' | 'tiles' | 'none'
 
 export type PatternInput = {
   ctx: CanvasRenderingContext2D
@@ -189,7 +189,10 @@ function tiles(p: PatternInput) {
   }
 }
 
-export const patterns: Record<PatternName, (p: PatternInput) => void> = { cells, lens, rings, flow, burst, tiles }
+// 'none': sections Emily wants plain black; the backdrop fades out over them.
+const none = () => {}
+
+export const patterns: Record<PatternName, (p: PatternInput) => void> = { cells, lens, rings, flow, burst, tiles, none }
 
 /** Keeps a canvas sized to its box at the device's pixel density. */
 export function fitCanvas(canvas: HTMLCanvasElement) {

@@ -14,7 +14,7 @@ export function Philosophy() {
         <h1>Built for progress. <em>Designed to last.</em></h1>
         <p>Science gives us direction. Conversation gives it meaning.</p>
       </section>
-      <section className="process section-pad" data-pattern="flow">
+      <section className="process section-pad plain-black" data-pattern="none">
         <div className="section-label">Our process</div>
         <div className="process-steps">
           {steps.map(([step, text], index) => (
@@ -26,7 +26,7 @@ export function Philosophy() {
           ))}
         </div>
       </section>
-      <section className="principles section-pad" data-pattern="tiles">
+      <section className="principles section-pad plain-black" data-pattern="none">
         <p className="eyebrow light">Four principles</p>
         <div>
           {principles.map(([title, text], index) => (
