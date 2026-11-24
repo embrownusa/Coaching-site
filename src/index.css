@@ -488,3 +488,13 @@ option { color: var(--blue); }
 .go-button.is-drifting::before { display: none; }
 .go-button.is-drifting pre { opacity: var(--fade, 1); color: #b8d6ff; text-shadow: 0 0 3px #4b8dff, 0 0 9px rgba(47,123,255,1), 0 0 20px rgba(30,95,255,.8); }
 .go-button.is-drifting .go-hint { transform: translateX(calc(-1 * var(--dx, 0px))); }
+
+/* Liquid glass buttons (liquid-glass-js): the WebGL canvas draws the glass behind the label. */
+.liquid-glass { background: rgba(255,255,255,.07); -webkit-backdrop-filter: blur(10px) saturate(1.3); backdrop-filter: blur(10px) saturate(1.3); color: #f2f6f8; text-shadow: 0 1px 2px rgba(0,0,0,.45); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(255,255,255,.08), 0 14px 34px rgba(0,0,0,.35); }
+.liquid-glass.glass-ready { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.liquid-glass span { color: inherit; }
+.liquid-glass-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; display: block; }
+.liquid-glass-pill { border-radius: 999px; }
+.liquid-glass-pill:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(255,255,255,.1), 0 18px 40px rgba(0,0,0,.4); }
+.liquid-glass-circle { border-radius: 50%; animation: none; }
+.liquid-glass-circle:hover { transform: scale(1.04); }

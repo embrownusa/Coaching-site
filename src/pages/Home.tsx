@@ -1,5 +1,6 @@
 import heroImage from '../assets/endurance-hero.jpg'
 import { Link } from '../components/Link'
+import { GlassLink } from '../components/GlassLink'
 import { InkCanvas } from '../components/InkCanvas'
 import { PatternTile } from '../components/PatternTile'
 import { ScrubText } from '../components/ScrubText'
@@ -48,10 +49,9 @@ export function Home() {
             Thoughtful, one-to-one coaching built around your physiology, your ambition, and the life
             you actually live.
           </p>
-          <Link className="button button-light" href="/book">
-            <PatternTile pattern="cells" cell={7} className="btn-pattern" />
+          <GlassLink className="button button-light" href="/book">
             <span className="btn-label">Book a free consultation</span> <span>↗</span>
-          </Link>
+          </GlassLink>
         </div>
         <div className="hero-stats">
           <div className="stat-word-box">
@@ -118,10 +118,9 @@ export function Home() {
           className="royal"
           text="“The best plan is the one that makes you stronger—and keeps you wanting to come back.”"
         />
-        <Link className="button button-dark" href="/coaches">
-          <PatternTile pattern="cells" cell={7} className="btn-pattern" />
+        <GlassLink className="button button-dark" href="/coaches">
           <span className="btn-label">Meet the team</span> <span>→</span>
-        </Link>
+        </GlassLink>
       </section>
     </main>
   )

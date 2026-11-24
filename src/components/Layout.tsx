@@ -2,6 +2,7 @@ import { PatternTile } from './PatternTile'
 import { useState } from 'react'
 import type { Route } from '../router'
 import { Link } from './Link'
+import { GlassLink } from './GlassLink'
 import { useUser } from '../auth'
 
 const navItems = [
@@ -66,9 +67,9 @@ export function Header({ route }: { route: Route }) {
         >
           {user ? 'My training' : 'Client login'}
         </Link>
-        <Link className="nav-cta" href="/book" onClick={close}><PatternTile pattern="cells" cell={7} className="btn-pattern" />
+        <GlassLink className="nav-cta" href="/book" onClick={close}>
           Free consultation <span>↗</span>
-        </Link>
+        </GlassLink>
       </nav>
     </header>
   )
@@ -83,9 +84,9 @@ export function Footer() {
           <p className="eyebrow">Ready when you are</p>
           <h2>Your next finish line starts here.</h2>
         </div>
-        <Link className="circle-link" href="/book"><PatternTile pattern="cells" cell={7} className="btn-pattern" />
+        <GlassLink className="circle-link" href="/book" shape="circle">
           Let’s talk <span>↗</span>
-        </Link>
+        </GlassLink>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Last Mile Endurance</span>

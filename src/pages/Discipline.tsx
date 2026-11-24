@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '../components/Link'
+import { GlassLink, refreshGlass } from '../components/GlassLink'
 import { PatternTile } from '../components/PatternTile'
 import { AsciiStart } from '../components/AsciiStart'
 import { coaches, disciplines } from '../content'
@@ -26,6 +27,8 @@ function InteractiveDiscipline({ slug }: { slug: DisciplineSlug }) {
       root.style.overflow = ''
       shell?.classList.add('past-stage')
     }
+    // Once the page has faded in, the glass button needs a fresh look at it.
+    if (phase === 'done') refreshGlass(300)
     return () => {
       root.style.overflow = ''
       shell?.classList.remove('past-stage')
@@ -92,10 +95,9 @@ function DisciplineBody({ slug }: { slug: DisciplineSlug }) {
       <section className="discipline-cta">
         <h2>Start with a conversation.</h2>
         <p>A free 20-minute consultation to talk through your racing, your week and your goals.</p>
-        <Link className="button button-light" href="/book">
-          <PatternTile pattern="cells" cell={7} className="btn-pattern" />
+        <GlassLink className="button button-light" href="/book">
           <span className="btn-label">Book a free consultation</span> <span>↗</span>
-        </Link>
+        </GlassLink>
       </section>
     </div>
   )

@@ -2,6 +2,7 @@ import { PatternTile } from '../components/PatternTile'
 import { useState, type FormEvent } from 'react'
 import { articles } from '../content'
 import { Link } from '../components/Link'
+import { GlassLink } from '../components/GlassLink'
 import { submitForm } from '../forms'
 import { NotFound } from './NotFound'
 
@@ -109,9 +110,9 @@ export function Resources() {
             and current schedule—then help you decide on the right next step.
           </p>
         </div>
-        <Link className="button button-light" href="/book"><PatternTile pattern="cells" cell={7} className="btn-pattern" />
-          Book a free consultation <span>↗</span>
-        </Link>
+        <GlassLink className="button button-light" href="/book">
+          <span className="btn-label">Book a free consultation</span> <span>↗</span>
+        </GlassLink>
       </section>
       <Newsletter />
     </main>

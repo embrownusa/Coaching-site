@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { refreshGlass } from './components/GlassLink'
 import { startMotion } from './motion'
 import { Footer, Header } from './components/Layout'
 import { PatternField } from './components/PatternField'
@@ -41,6 +42,8 @@ export default function App() {
     } else {
       document.title = titles[route.page]
     }
+    // The page under the glass buttons has changed, so they need a fresh look at it.
+    refreshGlass()
   }, [route])
 
   return (
