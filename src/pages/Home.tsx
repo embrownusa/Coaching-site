@@ -111,7 +111,7 @@ export function Home() {
         <InkCanvas />
       </section>
 
-      <section id="long-view" className="quote-section section-pad" data-pattern="burst">
+      <section id="long-view" className="quote-section section-pad plain-black" data-pattern="none">
         <p className="eyebrow">The long view</p>
         <ScrubText
           as="blockquote"

@@ -2,6 +2,7 @@ import { PatternTile } from '../components/PatternTile'
 import { useState, type FormEvent } from 'react'
 import { AUTH_DEMO, signIn, useUser } from '../auth'
 import { Link } from '../components/Link'
+import { GlassButton } from '../components/GlassLink'
 import { navigate } from '../router'
 
 export function Login() {
@@ -50,9 +51,9 @@ export function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
               />
-              <button className="button button-light" type="submit" disabled={status === 'sending'}><PatternTile pattern="cells" cell={7} className="btn-pattern" />
+              <GlassButton className="button button-light" type="submit" disabled={status === 'sending'}>
                 {status === 'sending' ? 'Sending…' : AUTH_DEMO ? 'Sign in' : 'Email me a link'} <span>→</span>
-              </button>
+              </GlassButton>
               {status === 'error' && <p className="form-note" role="alert">We couldn’t send that link. Please try again.</p>}
               {AUTH_DEMO && (
                 <p className="demo-note">Preview mode: any email works and nothing is stored online yet.</p>
