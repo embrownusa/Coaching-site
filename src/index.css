@@ -473,7 +473,7 @@ option { color: var(--blue); }
 .go-button:hover pre, .go-button:focus-visible pre { color: #fff; text-shadow: 0 0 8px #ffd60a, 0 0 24px rgba(255,149,0,.8); }
 .go-button:focus-visible { outline: 1px dashed rgba(230,236,239,.6); outline-offset: 10px; }
 .go-hint { font-family: var(--mono); font-size: 8px; letter-spacing: .14em; white-space: nowrap; text-transform: uppercase; color: #aab5ba; }
-@keyframes go-pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
+@keyframes go-pulse { 0%, 100% { transform: translate(calc(-50% + var(--dx, 0px)), -50%) scale(1); } 50% { transform: translate(calc(-50% + var(--dx, 0px)), -50%) scale(1.06); } }
 .is-interactive .discipline-body { transition: opacity .9s ease, transform .9s ease, filter .9s ease; }
 .is-interactive.phase-start .discipline-body { opacity: 0; transform: scale(.97); filter: blur(6px); }
 .replay-start { position: fixed; left: max(22px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 25; padding: 9px 14px; border: 1px solid rgba(230,236,239,.25); border-radius: 100px; background: rgba(0,0,0,.75); color: #cfd8dd; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
@@ -482,3 +482,9 @@ option { color: var(--blue); }
 .go-button::before { content: ''; position: absolute; inset: -30% -18%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.82), rgba(0,0,0,.55) 60%, transparent); }
 .go-button::before { inset: -70% -30%; background: radial-gradient(closest-side, rgba(0,0,0,.9), rgba(0,0,0,.7) 55%, transparent); }
 .go-button pre { font-weight: 700; color: #ffffff; text-shadow: 0 0 3px rgba(120,175,255,1), 0 0 10px rgba(47,123,255,.8); }
+
+/* Road: READY is part of the runner's blue streak, sliding left with it and fading in and out. */
+.go-button.is-drifting { transform: translate(calc(-50% + var(--dx, 0px)), -50%); }
+.go-button.is-drifting::before { display: none; }
+.go-button.is-drifting pre { opacity: var(--fade, 1); color: #b8d6ff; text-shadow: 0 0 3px #4b8dff, 0 0 9px rgba(47,123,255,1), 0 0 20px rgba(30,95,255,.8); }
+.go-button.is-drifting .go-hint { transform: translateX(calc(-1 * var(--dx, 0px))); }
