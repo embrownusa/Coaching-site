@@ -501,3 +501,9 @@ option { color: var(--blue); }
 
 /* Sections Emily wants without a backdrop pattern (2026-11-23, trial): plain black. */
 .plain-black { background: #000 !important; }
+
+/* Light gray text, at Emily's request (2026-11-23): login welcome, the whole Resources page, Philosophy's Listen / Build / Adapt. */
+.login-section h1, .login-section h1 em,
+.resources-page, .resources-page *:not(.liquid-glass-canvas),
+.process h2 { color: var(--soft-text) !important; }
+.resources-page ::placeholder { color: rgba(180,190,195,.6) !important; }
