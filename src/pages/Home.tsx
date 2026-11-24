@@ -84,16 +84,16 @@ export function Home() {
 
       <section id="disciplines" className="disciplines" data-pattern="lens">
         {[
-          { n: '01', name: 'Track', detail: '800m · 1500m · 5K', pattern: 'rings' as const },
-          { n: '02', name: 'Road', detail: '10K · Half · Marathon', pattern: 'flow' as const },
-          { n: '03', name: 'Triathlon', detail: 'Sprint · Olympic · Long course', pattern: 'burst' as const },
+          { n: '01', name: 'Track', href: '/track', detail: '800m · 1500m · 5K', pattern: 'rings' as const },
+          { n: '02', name: 'Road', href: '/road', detail: '10K · Half · Marathon', pattern: 'flow' as const },
+          { n: '03', name: 'Triathlon', href: '/triathlon', detail: 'Sprint · Olympic · Long course', pattern: 'burst' as const },
         ].map((d) => (
-          <Link key={d.name} href="/coaches" className="discipline">
+          <Link key={d.name} href={d.href} className="discipline">
             <PatternTile pattern={d.pattern} cell={16} className="discipline-art" />
             <span className="discipline-n">{d.n}</span>
             <h3>{d.name}</h3>
             <p>{d.detail}</p>
-            <span className="discipline-go" aria-hidden="true">Meet the coaches →</span>
+            <span className="discipline-go" aria-hidden="true">Explore {d.name.toLowerCase()} →</span>
           </Link>
         ))}
       </section>

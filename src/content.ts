@@ -102,3 +102,70 @@ export const articles: Article[] = [
   },
 ]
 
+
+/*
+ * The three discipline pages. Copy here is a first draft for Emily and Davis
+ * to rewrite in their own words.
+ */
+export type DisciplineInfo = {
+  n: string
+  name: string
+  art: 'stopwatch' | 'runner' | 'cyclist'
+  artLabel: string
+  events: string
+  headline: string
+  intro: string
+  focus: [string, string][]
+  coaches: string[]
+}
+
+export const disciplines: Record<'track' | 'road' | 'triathlon', DisciplineInfo> = {
+  track: {
+    n: '01',
+    name: 'Track',
+    art: 'stopwatch',
+    artLabel: 'A stopwatch drawn in ASCII characters, its seconds hand sweeping the dial',
+    events: '800m · 1500m · Mile · 3000m · 5K',
+    headline: 'Every lap has a split. Every split has a plan.',
+    intro:
+      'Middle distance rewards athletes who can hold pace under pressure and still change gear on the last lap. We build the aerobic engine first, then sharpen speed, rhythm and race craft so you arrive at the line knowing exactly how you want to run it.',
+    focus: [
+      ['Pace control', 'Interval sessions built around your goal splits, so race pace feels familiar long before race day.'],
+      ['Speed and mechanics', 'Short, sharp work and drills that keep your stride efficient when you are tired.'],
+      ['Racing tactics', 'How to sit, when to move and how to close, rehearsed in training and reviewed after every race.'],
+    ],
+    coaches: ['Davis Bove', 'Emily Brown'],
+  },
+  road: {
+    n: '02',
+    name: 'Road',
+    art: 'runner',
+    artLabel: 'A runner drawn in ASCII characters, with blue speed trails streaming behind',
+    events: '10K · Half marathon · Marathon',
+    headline: 'Built for the long road, and the last mile of it.',
+    intro:
+      'Road racing is patience turned into speed. We plan your weeks around the life you actually live, build mileage that your body can absorb, and practise the fuelling and pacing that decide the final miles of a race.',
+    focus: [
+      ['Aerobic base', 'Steady, progressive mileage that raises your ceiling without wearing you down.'],
+      ['Threshold and long runs', 'The key sessions that teach you to hold a strong pace for a long time.'],
+      ['Race-day plan', 'Pacing, fuelling and taper worked out together, so the race is a rehearsal you have already done.'],
+    ],
+    coaches: ['Davis Bove', 'Emily Brown'],
+  },
+  triathlon: {
+    n: '03',
+    name: 'Triathlon',
+    art: 'cyclist',
+    artLabel: 'A time-trial cyclist drawn in ASCII characters, wheels spinning, with blue speed trails',
+    events: 'Sprint · Olympic · 70.3 · Long course',
+    headline: 'Three sports, one plan that fits your week.',
+    intro:
+      'Triathlon asks you to balance swim, bike and run with work, family and recovery. We bring the three together in one schedule, put the hard days where they do the most good, and train the transitions that so often decide the result.',
+    focus: [
+      ['Balanced training', 'Swim, bike and run sessions weighted to your strengths, your limiters and your race.'],
+      ['Bike to run', 'Brick sessions and pacing on the bike so you still have legs for a strong run.'],
+      ['Race execution', 'Nutrition, transitions and pacing for each leg, planned and practised ahead of time.'],
+    ],
+    coaches: ['Davis Bove'],
+  },
+}

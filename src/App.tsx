@@ -12,7 +12,8 @@ import { NotFound } from './pages/NotFound'
 import { Book } from './pages/Book'
 import { Login } from './pages/Login'
 import { Account } from './pages/Account'
-import { articles } from './content'
+import { Discipline } from './pages/Discipline'
+import { articles, disciplines } from './content'
 
 const titles: Record<string, string> = {
   home: 'Last Mile Endurance · Private endurance coaching',
@@ -32,7 +33,9 @@ export default function App() {
   useEffect(() => startMotion(), [])
 
   useEffect(() => {
-    if (route.page === 'article') {
+    if (route.page === 'discipline') {
+      document.title = `${disciplines[route.slug].name} coaching · Last Mile Endurance`
+    } else if (route.page === 'article') {
       const article = articles.find((a) => a.slug === route.slug)
       document.title = `${article?.title ?? 'Field notes'} · Last Mile Endurance`
     } else {
@@ -41,7 +44,7 @@ export default function App() {
   }, [route])
 
   return (
-    <div className={`site-shell ${route.page === 'home' ? 'is-home' : ''}`}>
+    <div className={`site-shell ${route.page === 'home' ? 'is-home' : ''} ${route.page === 'discipline' ? 'is-discipline' : ''}`}>
       <PatternField />
       {!PREVIEW_MODE && <a className="skip-link" href="#main">Skip to content</a>}
       {PREVIEW_MODE && (
@@ -58,6 +61,7 @@ export default function App() {
         {route.page === 'book' && <Book />}
         {route.page === 'login' && <Login />}
         {route.page === 'account' && <Account />}
+        {route.page === 'discipline' && <Discipline key={route.slug} slug={route.slug} />}
         {route.page === 'not-found' && <NotFound />}
       </div>
       <Footer />

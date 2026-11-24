@@ -10,13 +10,20 @@ export type Route =
   | { page: 'book' }
   | { page: 'login' }
   | { page: 'account' }
+  | { page: 'discipline'; slug: DisciplineSlug }
   | { page: 'not-found' }
+
+export type DisciplineSlug = 'track' | 'road' | 'triathlon'
+export const disciplineSlugs: DisciplineSlug[] = ['track', 'road', 'triathlon']
 
 export function parsePath(pathname: string): Route {
   const parts = pathname.split('/').filter(Boolean)
   if (parts.length === 0) return { page: 'home' }
   const [first, second] = parts
   if (first === 'resources' && second) return { page: 'article', slug: second }
+  if (parts.length === 1 && (disciplineSlugs as string[]).includes(first)) {
+    return { page: 'discipline', slug: first as DisciplineSlug }
+  }
   const simple = ['coaches', 'philosophy', 'resources', 'contact', 'book', 'login', 'account'] as const
   if (parts.length === 1 && (simple as readonly string[]).includes(first)) {
     return { page: first as (typeof simple)[number] }
