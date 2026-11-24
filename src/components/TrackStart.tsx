@@ -13,18 +13,59 @@ const IMG_W = 794
 const IMG_H = 942
 const DIAL = { cx: 430, cy: 575, R: 236 }
 
-const GO_ART = [
-  ' .d8888b.   .d88888b.  ',
-  'd88P  Y88b d88P" "Y88b ',
-  '888    888 888     888 ',
-  '888        888     888 ',
-  '888  88888 888     888 ',
-  '888    888 888     888 ',
-  'Y88b  d88P Y88b. .d88P ',
-  ' "Y8888P88  "Y88888P"  ',
-].join('\n')
+// Same glyph ramp as the stopwatch artifact, from faint to dense.
+const BUCKETS = [' ', ".'`", ':;,-~', '!/\\|()[]{}<>?+=', 'tfjrxnuvczil', 'XYUJCLQ0OZmwqpdbkhao', '#MW&8%B', '@$']
 
-const COLORS = ['#ff3b30', '#ff9500', '#ffd60a', '#34c759', '#00c7be', '#2f7bff', '#5e5ce6', '#bf5af2', '#ff2d92', '#ffffff']
+const GO_FONT = '"Arial Black", "Helvetica Neue", Arial, sans-serif'
+
+/** Width over height of the letters "GO" as drawn, so the character grid can match their shape. */
+function goAspect() {
+  const g = document.createElement('canvas').getContext('2d')!
+  g.font = `900 100px ${GO_FONT}`
+  const m = g.measureText('GO')
+  return (m.actualBoundingBoxLeft + m.actualBoundingBoxRight) / (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent)
+}
+
+/** "GO" sampled onto a character grid the same size as the stopwatch's, as coverage levels 0..7. */
+function goLevels(cols: number, rows: number) {
+  const k = 6
+  const c = document.createElement('canvas')
+  c.width = cols * k
+  c.height = rows * k
+  const g = c.getContext('2d')!
+  g.fillStyle = '#fff'
+  g.font = `900 100px ${GO_FONT}`
+  const m = g.measureText('GO')
+  const w = m.actualBoundingBoxLeft + m.actualBoundingBoxRight
+  const h = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent
+  // Stretch the letters to fill the grid exactly.
+  g.setTransform(c.width / w, 0, 0, c.height / h, 0, 0)
+  g.fillText('GO', m.actualBoundingBoxLeft, m.actualBoundingBoxAscent)
+  const d = g.getImageData(0, 0, c.width, c.height).data
+  const levels: number[][] = []
+  for (let r = 0; r < rows; r++) {
+    const row: number[] = []
+    for (let q = 0; q < cols; q++) {
+      let sum = 0
+      for (let y = 0; y < k; y++) for (let x = 0; x < k; x++) sum += d[((r * k + y) * c.width + q * k + x) * 4 + 3]
+      const cover = sum / (k * k * 255)
+      row.push(cover < 0.12 ? 0 : Math.min(7, 2 + Math.floor(cover * 6)))
+    }
+    levels.push(row)
+  }
+  return levels
+}
+
+/** Turns coverage levels into text, picking a fresh glyph in each level so it shimmers like the art. */
+function goText(levels: number[][]) {
+  return levels
+    .map((row) => row.map((l) => BUCKETS[l][(Math.random() * BUCKETS[l].length) | 0]).join(''))
+    .join('\n')
+}
+
+// Shades of blue, with the odd red fleck.
+const BLUES = ['#06246e', '#0a3aa8', '#1249c9', '#1d5fd1', '#2f7bff', '#4b8dff', '#6aa6ff', '#8fbfff', '#b8d6ff', '#dbeaff', '#1e90ff', '#3a6fd8']
+const pickColor = () => (Math.random() < 0.035 ? (Math.random() < 0.5 ? '#ff3b30' : '#e0222b') : BLUES[(Math.random() * BLUES.length) | 0])
 
 type Particle = { x: number; y: number; vx: number; vy: number; size: number; color: string; life: number; spin: number }
 
@@ -48,6 +89,7 @@ function dialOnScreen(canvas: HTMLCanvasElement) {
     x: ox + (X0 + (DIAL.cx * Wd) / IMG_W) * s,
     y: oy + (Y0 + (DIAL.cy * Hd) / IMG_H) * s,
     r: ((DIAL.R * Wd) / IMG_W) * s,
+    s,
   }
 }
 
@@ -55,8 +97,27 @@ export function TrackStart({ onReveal, onDone }: { onReveal: () => void; onDone:
   const art = useRef<HTMLCanvasElement>(null)
   const burst = useRef<HTMLCanvasElement>(null)
   const stop = useRef<() => void>(() => {})
-  const [dial, setDial] = useState<{ x: number; y: number; r: number } | null>(null)
+  const [dial, setDial] = useState<{ x: number; y: number; r: number; s: number } | null>(null)
   const [fired, setFired] = useState(false)
+  const [goArt, setGoArt] = useState('')
+  const [glyph, setGlyph] = useState(1)
+
+  // GO spans about 0.42 of the dial radius (a third of the first try), drawn with characters the size of the stopwatch's own.
+  useEffect(() => {
+    if (!dial) return
+    // On small screens the art's characters are large, so shrink GO's a little to keep the letters readable.
+    const width = dial.r * 0.42
+    const scale = Math.min(dial.s, width / (22 * 6))
+    setGlyph(scale)
+    const charW = 6 * scale
+    const charH = 12 * scale
+    const cols = Math.round(width / charW)
+    const rows = Math.max(5, Math.round(width / goAspect() / charH))
+    const levels = goLevels(cols, rows)
+    setGoArt(goText(levels))
+    const timer = window.setInterval(() => setGoArt(goText(levels)), 260)
+    return () => window.clearInterval(timer)
+  }, [dial])
 
   // Run the stopwatch and keep the GO button on its dial.
   useEffect(() => {
@@ -116,7 +177,7 @@ export function TrackStart({ onReveal, onDone }: { onReveal: () => void; onDone:
           vx: Math.cos(a) * speed,
           vy: Math.sin(a) * speed - 60,
           size: 2 + Math.random() * 3,
-          color: COLORS[(Math.random() * COLORS.length) | 0],
+          color: pickColor(),
           life: 0.9 + Math.random() * 0.9,
           spin: Math.random() * 6,
         })
@@ -132,7 +193,7 @@ export function TrackStart({ onReveal, onDone }: { onReveal: () => void; onDone:
         vx: Math.cos(a) * speed,
         vy: Math.sin(a) * speed,
         size: 2 + Math.random() * 2.5,
-        color: COLORS[(Math.random() * COLORS.length) | 0],
+        color: pickColor(),
         life: 0.6 + Math.random() * 0.8,
         spin: 0,
       })
@@ -164,7 +225,7 @@ export function TrackStart({ onReveal, onDone }: { onReveal: () => void; onDone:
       }
       if (t < 0.9) {
         const k = t / 0.9
-        ctx.strokeStyle = `rgba(255, 214, 10, ${0.7 * (1 - k)})`
+        ctx.strokeStyle = `rgba(120, 175, 255, ${0.7 * (1 - k)})`
         ctx.lineWidth = 6 * (1 - k) + 1
         ctx.beginPath()
         ctx.arc(dial.x, dial.y, dial.r * 0.2 + k * maxR * 0.7, 0, Math.PI * 2)
@@ -211,9 +272,9 @@ export function TrackStart({ onReveal, onDone }: { onReveal: () => void; onDone:
           className="go-button"
           onClick={fire}
           aria-label="Go: start the Track page"
-          style={{ left: dial.x, top: dial.y, fontSize: Math.max(7, (dial.r * 1.25) / 13.5) }}
+          style={{ left: dial.x, top: dial.y, fontSize: 10 * glyph, lineHeight: `${12 * glyph}px` }}
         >
-          <pre aria-hidden="true">{GO_ART}</pre>
+          <pre aria-hidden="true">{goArt}</pre>
           <span className="go-hint">Tap to start</span>
         </button>
       )}
